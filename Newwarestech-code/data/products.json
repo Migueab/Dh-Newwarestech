@@ -1,0 +1,462 @@
+[
+    {
+        "id": 1,
+        "name": "xiaomi1",
+        "image": "/images/celulares/xiaomi1.png",
+        "price": "$70.000",
+        "product_type": "phones",
+        "deleted": false
+    },
+    {
+        "id": 2,
+        "name": "xiaomi",
+        "image": "/images/celulares/xiaomi2.png",
+        "price": "$920.000",
+        "product_type": "phones",
+        "deleted": false
+    },
+    {
+        "id": 3,
+        "name": "iphone",
+        "image": "/images/celulares/iphone1.png",
+        "price": "$350.000",
+        "product_type": "phones",
+        "deleted": false
+    },
+    {
+        "id": 4,
+        "name": "iphone",
+        "image": "/images/celulares/iphone2.png",
+        "price": "$280.000",
+        "product_type": "phones",
+        "deleted": false
+    },
+    {
+        "id": 5,
+        "name": "huawei",
+        "image": "/images/celulares/huawei1.png",
+        "price": "$62.000",
+        "product_type": "phones",
+        "deleted": false
+    },
+    {
+        "id": 6,
+        "name": "huawei",
+        "image": "/images/celulares/huawei2.png",
+        "price": "$75.000",
+        "product_type": "phones",
+        "deleted": false
+    },
+    {
+        "id": 7,
+        "name": "impresora epton",
+        "image": "/images/impresoras/impresora_1.png",
+        "price": "$80.000",
+        "product_type": "printer",
+        "deleted": false
+    },
+    {
+        "id": 8,
+        "name": "impresora hp",
+        "image": "/images/impresoras/images.png",
+        "price": "$99.999",
+        "product_type": "printer",
+        "deleted": false
+    },
+    {
+        "id": 9,
+        "name": "impresora hp1",
+        "image": "/images/impresoras/impresora_2.png",
+        "price": "$110.000",
+        "product_type": "printer",
+        "deleted": false
+    },
+    {
+        "id": 10,
+        "name": "impresora epson",
+        "image": "/images/impresoras/impresora_3.png",
+        "price": "$130.000",
+        "product_type": "printer",
+        "deleted": false
+    },
+    {
+        "id": 11,
+        "name": "impresora epson",
+        "image": "/images/impresoras/impresora_4.png",
+        "price": "$152.000",
+        "product_type": "printer",
+        "deleted": false
+    },
+    {
+        "id": 12,
+        "name": "excel",
+        "image": "/images/informatica/excel.png",
+        "price": "$280",
+        "product_type": "software",
+        "deleted": false
+    },
+    {
+        "id": 13,
+        "name": "word1",
+        "image": "/images/informatica/word.png",
+        "price": "$280",
+        "product_type": "software",
+        "deleted": false
+    },
+    {
+        "id": 14,
+        "name": "powerpoint",
+        "image": "/images/informatica/powerpoint.png",
+        "price": "$280",
+        "product_type": "software",
+        "deleted": false
+    },
+    {
+        "id": 15,
+        "name": "outlook",
+        "image": "/images/informatica/outlook.png",
+        "price": "$280",
+        "product_type": "software",
+        "deleted": false
+    },
+    {
+        "id": 16,
+        "name": "one note",
+        "image": "/images/informatica/one.png",
+        "price": "$280",
+        "product_type": "software",
+        "deleted": false
+    },
+    {
+        "id": 17,
+        "name": "seguridad de windows",
+        "image": "/images/informatica/seguridad.png",
+        "price": "$280",
+        "product_type": "software",
+        "deleted": false
+    },
+    {
+        "id": 18,
+        "name": "auriculares",
+        "image": "/images/accesorios/auriculares/auricular1.png",
+        "price": "$14.999",
+        "product_type": "accesories",
+        "deleted": false
+    },
+    {
+        "id": 19,
+        "name": "computadora1",
+        "image": "/images/accesorios/computadoras/computadora1.png",
+        "price": "$240.000",
+        "product_type": "accesories",
+        "deleted": false
+    },
+    {
+        "id": 20,
+        "name": "mouse",
+        "image": "/images/accesorios/mouse/mouse1.png",
+        "price": "$4.800",
+        "product_type": "accesories",
+        "deleted": false
+    },
+    {
+        "id": 21,
+        "name": "parlantes",
+        "image": "/images/accesorios/parlantes/parlante1.png",
+        "price": "$3.500",
+        "product_type": "accesories",
+        "deleted": false
+    },
+    {
+        "id": 22,
+        "name": "sillas",
+        "image": "/images/accesorios/sillas/silla1.png",
+        "price": "$38.000",
+        "product_type": "accesories",
+        "deleted": false
+    },
+    {
+        "id": 23,
+        "name": "teclados",
+        "image": "/images/accesorios/teclados/teclado1.png",
+        "price": "$22.000",
+        "product_type": "accesories",
+        "deleted": false
+    },
+    {
+        "id": 24,
+        "name": "impresora hp",
+        "image": "/images/impresoras/images (4).png",
+        "price": "$230.000",
+        "product_type": "printer",
+        "deleted": false
+    },
+    {
+        "name": "PhoneApple",
+        "price": "500000",
+        "description": "dasdds",
+        "image": "/images/1689294134620-phone.jpeg",
+        "id": 25,
+        "deleted": false
+    },
+    {
+        "product_type": "phones",
+        "name": "PhoneApple",
+        "price": "500000",
+        "description": "dasdds",
+        "image": "/images/1689294142801-phone.jpeg",
+        "id": 26,
+        "deleted": true
+    },
+    {
+        "product_type": "phones",
+        "name": "PhoneApple",
+        "price": "500000",
+        "description": "dasdds",
+        "image": "/images/1689294151746-phone.jpeg",
+        "id": 27,
+        "deleted": true
+    },
+    {
+        "product_type": "software",
+        "name": "SoftwareXX",
+        "price": "32423423",
+        "description": "fdsdsf",
+        "image": "/images/1689294251241-Imagen.png",
+        "id": 28,
+        "deleted": true
+    },
+    {
+        "product_type": "software",
+        "name": "SoftwareXX",
+        "price": "32423423",
+        "description": "fdsdsf",
+        "image": "/images/1689294258852-Imagen.png",
+        "id": 29,
+        "deleted": true
+    },
+    {
+        "product_type": "phones",
+        "name": "Phone",
+        "price": "3232323",
+        "description": "asdas",
+        "image": "/images/1689351130112-phone.jpeg",
+        "id": 30,
+        "deleted": true
+    },
+    {
+        "product_type": "phones",
+        "name": "Phone",
+        "price": "3232323",
+        "description": "asd",
+        "image": "/images/1689351259323-phone.jpeg",
+        "id": 31,
+        "deleted": true
+    },
+    {
+        "product_type": "phones",
+        "name": "Phone",
+        "price": "3232323",
+        "description": "rrrff",
+        "image": "/images/1689351292731-phone.jpeg",
+        "id": 32,
+        "deleted": true
+    },
+    {
+        "product_type": "phones",
+        "name": "Phone",
+        "price": "3232323",
+        "description": "asdas",
+        "image": "/images/1689351359409-phone.jpeg",
+        "id": 33,
+        "deleted": true
+    },
+    {
+        "product_type": "phones",
+        "name": "Phone",
+        "price": "3232323",
+        "description": "asdas",
+        "image": "/images/1689351490791-phone.jpeg",
+        "id": 34,
+        "deleted": true
+    },
+    {
+        "product_type": "software",
+        "name": "SoftwareXX",
+        "price": "32423423",
+        "description": "asd",
+        "image": "/images/1689351591857-software-1-e1550080087611-800x400.jpeg",
+        "id": 35,
+        "deleted": false
+    },
+    {
+        "product_type": "software",
+        "name": "SoftwareXX",
+        "price": "500000",
+        "description": "asdas",
+        "image": "/images/1689351613258-software-1-e1550080087611-800x400.jpeg",
+        "id": 36,
+        "deleted": true
+    },
+    {
+        "product_type": "phones",
+        "name": "Phone",
+        "price": "500000",
+        "description": "asdas",
+        "image": "/images/1689353568258-phone.jpeg",
+        "id": 37,
+        "deleted": true
+    },
+    {
+        "product_type": "phones",
+        "name": "Phone",
+        "price": "111111",
+        "description": "asdas",
+        "image": "/images/1689353631080-phone.jpeg",
+        "id": 38,
+        "deleted": true
+    },
+    {
+        "product_type": "phones",
+        "name": "Phone",
+        "price": "3232323",
+        "description": "asdas",
+        "image": "/images/1689381320402-phone.jpeg",
+        "id": 39,
+        "deleted": true
+    },
+    {
+        "product_type": "phones",
+        "name": "Phone",
+        "price": "",
+        "description": "",
+        "image": "/images/1689381387625-phone.jpeg",
+        "id": 40,
+        "deleted": true
+    },
+    {
+        "product_type": "phones",
+        "name": "Phone",
+        "price": "3232323",
+        "description": "asdasd",
+        "image": "/images/1689381406638-phone.jpeg",
+        "id": 41,
+        "deleted": true
+    },
+    {
+        "name": "PhoneSSSSXX",
+        "price": "1000000",
+        "description": "dasd",
+        "image": "/images/1689381482964-phone.jpeg",
+        "id": 42,
+        "deleted": false
+    },
+    {
+        "product_type": "accesories",
+        "name": "watch",
+        "price": "500000",
+        "description": "asdasd",
+        "image": "/images/1689383294002-s-l225.jpeg",
+        "id": 43,
+        "deleted": false
+    },
+    {
+        "product_type": "printer",
+        "name": "impresora10",
+        "price": "1000000",
+        "description": "asdasd",
+        "image": "/images/1689383569937-foto-ecotank-L8180-5-690x480.jpeg",
+        "id": 44,
+        "deleted": false
+    },
+    {
+        "product_type": "phones",
+        "name": "Phone",
+        "price": "1000000",
+        "description": "rrrff",
+        "image": "/images/1689806920379-phone.jpeg",
+        "id": 45,
+        "deleted": true
+    },
+    {
+        "product_type": "printer",
+        "name": "PrinterX",
+        "price": "3232323",
+        "description": "asd",
+        "image": "/images/1689807088617-foto-ecotank-L8180-5-690x480.jpeg",
+        "id": 46,
+        "deleted": false
+    },
+    {
+        "product_type": "phones",
+        "name": "Phone",
+        "price": "500000",
+        "description": "asdasd",
+        "image": "/images/1689807157163-phone.jpeg",
+        "id": 47,
+        "deleted": true
+    },
+    {
+        "product_type": "software",
+        "name": "SoftwareXXDD",
+        "price": "3232323",
+        "description": "rrrff",
+        "image": "/images/1689807215950-software-1-e1550080087611-800x400.jpeg",
+        "id": 48,
+        "deleted": false
+    },
+    {
+        "product_type": "phones",
+        "name": "PhoneS1",
+        "price": "123123",
+        "description": "sdasds",
+        "image": "/images/products1690422461440-phone.jpeg",
+        "id": 49,
+        "deleted": true
+    },
+    {
+        "product_type": "phones",
+        "name": "PhoneS1",
+        "price": "123123",
+        "description": "sdasds",
+        "image": "/images/1690422510811-phone.jpeg",
+        "id": 50,
+        "deleted": true
+    },
+    {
+        "product_type": "phones",
+        "name": "PhoneS1X",
+        "price": "1231232",
+        "description": "sdasdsd",
+        "image": "/images/1690422527453-phone.jpeg",
+        "id": 51,
+        "deleted": true
+    },
+    {
+        "product_type": "phones",
+        "name": "Phone",
+        "price": "2343",
+        "description": "asdasd",
+        "image": "/images/1690588215696-phone.jpeg",
+        "id": 52,
+        "deleted": true
+    },
+    {
+        "product_type": "accesories",
+        "name": "watch",
+        "price": "12222222",
+        "description": "sadas",
+        "image": "/images/1690588261725-s-l225.jpeg",
+        "id": 53,
+        "deleted": true
+    },
+    {
+        "name": "PhoneSSXX",
+        "price": "121212",
+        "description": "asdasd",
+        "image": "/images/1690598095789-phone.jpeg",
+        "id": 54,
+        "deleted": false,
+        "product_type": "phones"
+    }
+]

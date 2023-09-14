@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/main/home.css">
+    <link rel="stylesheet" href="/css/product/productlists.css">
+    <link rel="stylesheet" href="/css/product/style-carrito.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6 .4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Listado de productos</title>
+</head>
+<body>
+    <%- include('../partials/header') %>
+    <main>
+        <div class="productContainer">
+
+            <% products.forEach(products=>{%>
+                
+                <article class="article">
+
+                    <input type="text" name="nombre" value="<%= products.nombre %>" readonly> 
+                    <img src="<%= products.imagen %>" alt="">
+                    <input type="text" name="precio" value="<%= products.precio %>" readonly>
+                       
+                    <div class="botones">
+
+                            <% if (locals.isLogged) { %>
+                                <a href="/products/<%= products.id %>/addToCart"><input type="button" value="Agregar al carrito"></a> 
+                            <% } %>
+                            <% if (locals.adminIsLogged) { %>
+                                <a href="/<%= products.id %>/addToAdminCart"><input type="button" value="Agregar al carrito"></a> 
+                            <% } %>
+                            
+                            <a href="/products/<%= products.id %>/productDetail"><input type="button" value="Ver en detalle"></a> 
+                        </div>
+
+                </article>
+            <%}) %>
+            <br>     
+        </div>
+    </main>
+    <%- include('../partials/footer') %>
+</body>
+</html> 

@@ -1,0 +1,57 @@
+<link rel="stylesheet" href="/css/product/style-carrito.css">
+
+<%- include('../partials/header') %>
+
+    <H2>Actualizar Producto</H2>
+
+    <div>
+
+        <% if(errors.length >0){ %>
+    <ul>
+        <% errors.forEach( elemento =>{ %>
+
+            <li>
+                <%= elemento.msg %>
+            </li>
+
+            <% }) %>
+    </ul>
+        <% } %>
+
+    </div>
+
+            <form action="/products/<%= products.id %>/update?_method=put" method="post" enctype="multipart/form-data">
+                <fieldset>
+                    <div>
+                        <label for=""><h3 style="color: green;">Producto numero <%= products.id %></h3></label>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Elige una Categoria</legend>
+                    <label><input type="radio" name="product_type" value="phones">phones</label>
+                    <label><input type="radio" name="product_type" value="software">software</label>
+                    <label><input type="radio" name="product_type" value="accesories">accesories</label>
+                    <label><input type="radio" name="product_type" value="printer">printer</label>
+                </fieldset><br>
+                <fieldset>
+                    
+                    <legend>Ingresa la Infomación</legend>
+                    <label for="name">Nombre: </label>
+                    <input type="text" name="name" id="name" value="<%= products.name %>"><br>
+                    
+                    <div>
+                        <label for="image">Imagen</label>
+                        <input type="text" name="img" id="img" value="<%= products.image %>"><br>
+                        <input type="file" name="image" id="image" value="<%= products.image %>"><br>
+                    </div>
+                    <div>
+                        <label for="price">Precio: </label>
+                        <input type="text" name="price" id="price" value="<%= products.price %>"><br>
+                    </div>
+                    <div>
+                        <label for="description">Descripción: </label>
+                        <input type="text" name="description" id="description" value="<%= products.descripcion %>"><br>
+                    </div>
+                </fieldset><br>
+                <input type="submit" value="Guardar cambios">
+            </form>

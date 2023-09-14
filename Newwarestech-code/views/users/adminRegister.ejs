@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css//user/register.css" />
+    <link rel="stylesheet" href="/css/product/style-carrito.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Formulario Registro Administradores</title>
+</head>
+<body>
+
+    <div class="contenedor">
+
+        <%- include('../partials/header') %>
+  
+         <section class="main">
+          <div class="header"><h3>CREA TU CUENTA</h3></div>
+          <div class="contenedor">
+  
+            
+            <div style="color: red;">
+              <ul>
+                <% if(errors.length>0){%>
+                  <h4 style="color: red;">Por favor revise el formulario a llenar:</h4>
+                 
+                  <% errors.forEach(elemento=>{%>
+              
+                 <li>
+                    <% if (elemento.path==='nombre') { %>
+                      <%= elemento.msg%>
+                    <% } %>
+                    <% if (elemento.path==='apellido') { %>
+                      <%= elemento.msg%>
+                    <% } %>
+                    <% if (elemento.path==='email') { %>
+                      <%= elemento.msg%>
+                    <% } %>
+                    <% if (elemento.path==='password') { %>
+                      <%= elemento.msg%>
+                    <% } %>
+                    <% }) %>
+                    <% } %>
+                    </li>
+                  </ul>
+                </div>
+  
+  
+            <form action='/adminregister' method="POST"> 
+              <div>
+              <label for="nombre">
+                <% if(errors.length>0){ %>
+                  <% }else{%>
+                    <span>Nombre</span>
+                 <% } %>
+                <input type="text" name="nombre" id="nombre" value="<%= values.nombre %>">
+              </label>
+              </div> 
+  
+              <div>
+                <label for="apellido">
+                  <% if(errors.length>0){ %>
+                    <% }else{%>
+                      <span>Apellido</span>
+                   <% } %>
+                  <input type="text" name="apellido" id="apellido" value="<%= values.apellido %>" >
+                </label>
+                </div> 
+  
+            <div>
+              <label for="email">
+                <% if(errors.length>0){ %>
+                  <% }else{%>
+                    <span>Correo</span>
+                 <% } %>
+                <input type="email" name="email" id="email" value="<%= values.email %>" />
+              </label>
+            </div>
+  
+            <div>
+              <label for="password">
+                <% if(errors.length>0){ %>
+                  <% }else{%>
+                    <span>Contraseña</span>
+                 <% } %>
+      
+                <input type="password" name="password" id="password"/>
+              </label>
+            </div> 
+  
+            <div>
+              <label for="confirmpassword">
+                <% if(errors.length>0){ %>
+                    
+                  <% }else{%>
+                    <span>Confirmar Contreseña</span>
+                 <% } %>
+                <input type="password" name="confirmpassword" id="confirmpassword"/>
+              </label>
+            </div>
+  
+            <div>
+              <label for="image">
+                <span>Foto</span>
+                <input type="file" name="image" id="image">
+              </label>
+            </div>
+  
+              <div>
+                <input type="checkbox" name="robot">
+                No soy un robot  
+              </div>
+  
+                <div>
+                <input type="submit" value="Crear Cuenta">
+                </div>
+            
+            </form>
+            <script> 
+              
+              const inputs = document.querySelectorAll('input');
+              inputs.forEach(input => {
+  
+                input.onfocus = ()=>{
+                      input.previousElementSibling.classList.add('top');
+                      input.previousElementSibling.classList.add('focus');
+                      input.parentNode.classList.add('focus');
+                }
+  
+  
+                input.onblur =()=>{
+                  input.value = input.value.trim();
+                  if(input.value.trim().length == 0){
+                    input.previousElementSibling.classList.remove('top');
+                  }
+                      input.previousElementSibling.classList.remove('focus');
+                      input.parentNode.classList.remove('focus');
+                }
+  
+              });
+  
+            </script>
+  
+            <p>¿Ya tienes una cuenta? <a href="#">Inicia sesión</a>.</p>
+            
+          </div>
+        </section>
+        <%- include('../partials/footer') %>
+      </div>
+    
+</body>
+</html>
