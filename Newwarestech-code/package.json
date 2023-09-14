@@ -1,0 +1,33 @@
+{
+  "name": "proyectointegrador",
+  "version": "1.0.0",
+  "description": "Link de acceso al [**repositorio**](https://github.com/divianl/grupo_9_newwarestech.git \"repositorio\")\r # NEWWARESTECH\r Este proyecto consiste en el desarrollo de una página web de venta de artículos electrónicos, en la que los usuarios puedan explorar una amplia variedad de productos electrónicos, incluyendo dispositivos móviles, computadoras, tablets, televisores, consolas de videojuegos, entre otros. \r <p>",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "npx nodemon app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/divianl/grupo_9_newwarestech.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/divianl/grupo_9_newwarestech/issues"
+  },
+  "homepage": "https://github.com/divianl/grupo_9_newwarestech#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "express-validator": "^7.0.1",
+    "method-override": "^3.0.0",
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^2.0.22",
+    "uuid": "^9.0.0"
+  }
+}

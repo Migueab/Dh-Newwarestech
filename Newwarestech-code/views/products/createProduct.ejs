@@ -1,0 +1,65 @@
+<link rel="stylesheet" href="/css/product/style-carrito.css">
+<%- include('../partials/header') %>
+        <H1>Crear Producto</H1>
+
+
+            <div style ="color: red;" style="font-size: small;">
+                
+                <% if (errors.length > 0) { %>
+                    <h2>Por favor verifique el formulario a llenar:</h2>
+                    <ul>
+                        <% errors.forEach(elemento=>{%>
+                        <li>
+                               <%= elemento.msg%>
+                            </li>
+
+                            <% })%> 
+                    </ul>
+                <%}%>
+
+            </div>
+
+        <form action="/products/createProduct" method="post" enctype="multipart/form-data" >
+            <fieldset>
+                <legend>Elige una Categoria</legend>
+                
+                <div>
+                    <label for="product_type">Phones</label>
+                    <input type="radio" name="product_type" id="product_type" value="phones">
+                </div>
+                <div>
+                    <label for="product_type">Software</label>
+                    <input type="radio" name="product_type" id="product_type" value="software">
+                </div>
+                <div>
+                    <label for="product_type">Accesories</label>
+                    <input type="radio" name="product_type" id="product_type"  value="accesories">
+                </div>
+                <div>
+                    <label for="product_type">Printer</label>
+                    <input type="radio" name="product_type" id="product_type" value="printer">
+                </div>
+            </fieldset><br>
+            <fieldset>
+                <legend>Ingresa la Infomación</legend>
+                <div>
+                    <label for="name">Nombre</label>
+                    <input type="text" name="name" id="name" placeholder="nombre" value="<%= values.name %>">
+                </div>
+                <div>
+                    <label for="img">Imagen</label>
+                    <input type="file" name="image" id="image" value="<%= values.img %>">
+                </div>
+                <div>
+                    <label for="price">Price</label>
+                    <input type="text" name="price" id="price" placeholder="precio" value="<%= values.price %>">
+                </div>
+                <div>
+                    <label for="description">Descripcion</label>
+                    <input type="text" name="description" id="description" placeholder="descripcion" value="<%= values.description %>">
+                </div>
+            </fieldset>
+            <div>
+                <input type="submit" value="agregar">
+            </div>
+        </form>

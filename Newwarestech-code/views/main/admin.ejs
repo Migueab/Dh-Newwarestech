@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/main/home.css">
+    <link rel="stylesheet" href="/css/product/productlists.css">
+    <link rel="stylesheet" href="/css/product/style-carrito.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6 .4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Listado de productos</title>
+</head>
+
+<body>
+    <%- include('../partials/header') %>
+
+        <div>
+            <br>
+            <% if (!locals.adminIsLogged) { %>
+                <h4>Login Admin</h2>
+                    <% }else{ %>
+                        <h4>Login Admin</h2>
+                            <p style="color: green;">En sesion de <%= session.nombre %></p>
+                            <% } %>
+
+                                <div style="color: red;">
+                                    <ul>
+                                        <% errors.forEach(elemento=>{%>
+                                            <li>
+                                                <%= elemento.msg %>
+                                            </li>
+                                            <%}) %>
+                                    </ul>
+                                </div>
+
+                                <% if (!locals.adminIsLogged) { %>
+
+                                    <% if (locals.isLogged) { %>
+                                        <h3 style="color: red;">Debe cerrar la sesion de usuario previamente para inciar sesion como administrador.</h3>
+                                        <br>
+                                        <% } %>
+                                    <% if (!locals.isLogged) { %>
+
+                                     <form action="/admin" method="post">
+                                         <div>
+                                             <label for="email">Email</label>
+                                             <input type="text" name="email" id="email">
+                                            </div>
+                                            <br>
+                                            <div>
+                                                <label for="">Password</label>
+                                                <input type="password" name="password" id="password">
+                                            </div>
+                                            <br>
+                                            <div>
+                                                <label for="rememberme">Rememberme</label>
+                                                <input type="checkbox" name="rememberme" id="rememberme" checked>
+                                            </div>
+                                            <br>
+                                            <div>
+                                                <input type="submit" value="Continuar">
+                                            </div>
+                                        </form>
+                                        <br>
+                                        <br>
+                                    </div>
+                                    <% } %>
+        <% }else{%>
+
+            <div>
+                <br>
+                <h2>Cerrar sesion del usuario administrador:</h2>
+                <br>
+                <form action="/adminlogout" method="post">
+                    <input type="submit" value="Cerrar sesion">
+                </form>
+            </div>
+            <br><br>
+            <div>
+                <a href="/users/userList">Usuarios</a><br><br><br>
+            </div>
+            <br><br>
+            <div>
+                <a href="/products/createProduct">Crear productos</a><br>
+            </div>
+            <br><br>
+            <div>
+                <a href="/adminregister">Crear nuevo usuario administrador</a>
+            </div>
+            <br><br>
+
+            <h3>USUARIOS ADMINISTRADORES</h3>
+            <p style="color: green;"> * El perfil de los usuarios adminstradores son modificables unicamente desde la sesion del mismo.</p>
+            <% usersAdmin.forEach(elemento=>{%>
+                <%if(elemento.email === session.email){%>
+                    <br>
+                    <a href="/updateadminuser/<%= elemento.id %>"><%= elemento.email %></a>
+                    <% } %>
+                <%});%>
+                <br>
+                <% usersAdmin.forEach(elemento=>{%>
+                    <br>
+                    <%= elemento.email %>
+                    <a href="/adminuserprofile/<%= elemento.id %>?id=<%= elemento.id %>">Ver perfil</a>
+                    <br>
+                    <%}) %>
+                    <br>
+                    <br>
+                    
+                    <%}%>
+                    <%- include('../partials/footer') %>
+</body>
+
+</html>

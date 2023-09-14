@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css//user/register.css" />
+    <link rel="stylesheet" href="/css/product/style-carrito.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Edicion Registro Administradores</title>
+</head>
+<body>
+    <%- include('../partials/header') %>
+    <br>
+    <form action="/updateadminuser/<%= userAdmin.id %>/update?_method=put" method="post">
+        
+        <div>
+            <h2>Usuario: <%= userAdmin.nombre %></h2>
+            <h2>Email: <%= userAdmin.email %></h2>
+        </div>
+        <label for="nombre">Nombre</label>
+        <input type="text" name="nombre" id="nombre" value="<%= userAdmin.nombre %>">
+        <label for="apellido">Apellido</label>
+        <input type="text" name="apellido" id="apellido" value="<%= userAdmin.apellido %>">
+
+        <input type="submit">
+    </form>
+
+    <br>
+
+    <form action="/updateadminuser/<%= userAdmin.id %>/delete?_method=delete" method="post">
+        
+        <input type="submit" value="Eliminar">
+    </form>
+
+    <%- include('../partials/footer') %>
+</body>
+</html>
