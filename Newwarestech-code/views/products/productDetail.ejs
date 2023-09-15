@@ -23,13 +23,13 @@
       <section class="main">
         <div class="container-productdetail">
           <div class="main1">
-            <img src="<%= product.image %>" alt="img">            
+            <img src="<%= product.imagen %>" alt="img">            
           </div>
           <div class="main2">
-            <p>Nombre del producto: <%= product.name %></p>
-            <p>Precio: <%= product.price %> </p>
+            <p>Nombre del producto: <%= product.nombre %></p>
+            <p>Precio: <%= product.precio %> </p>
             <p>Fabricante:</p>
-            <p>Descripción:</p> <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam ipsa omnis, adipisci assumenda at totam nihil provident, ducimus eius ipsam, facilis sapiente ab fugit. Quas deserunt illum sit officiis atque.</p>
+            <p>Descripción:</p> <p><%= product.descripcion %></p>
             
             <% if (locals.IsLogged) { %>
             <a href="/products/<%= product.id %>/addToCart"><input type="button" value="Agregar al carrito"></a> 

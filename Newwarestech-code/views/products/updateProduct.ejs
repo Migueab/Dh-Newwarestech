@@ -37,16 +37,19 @@
                     
                     <legend>Ingresa la Infomación</legend>
                     <label for="name">Nombre: </label>
-                    <input type="text" name="name" id="name" value="<%= products.name %>"><br>
+                    <input type="text" name="name" id="name" value="<%= products.nombre %>"><br>
                     
                     <div>
-                        <label for="image">Imagen</label>
-                        <input type="text" name="img" id="img" value="<%= products.image %>"><br>
-                        <input type="file" name="image" id="image" value="<%= products.image %>"><br>
+                        <label for="imagen">Imagen</label>
+                        <input type="file" name="imagen" id="imagen" value="<%= products.imagen %>"><br>
                     </div>
                     <div>
                         <label for="price">Precio: </label>
-                        <input type="text" name="price" id="price" value="<%= products.price %>"><br>
+                        <input type="text" name="price" id="price" value="<%= products.precio %>"><br>
+                    </div>
+                    <div>
+                        <label for="stock">Stock: </label>
+                        <input type="text" name="stock" id="stock" value="<%= products.stock %>"><br>
                     </div>
                     <div>
                         <label for="description">Descripción: </label>

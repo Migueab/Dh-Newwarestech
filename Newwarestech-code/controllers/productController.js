@@ -11,109 +11,109 @@ const productController = {
 
     //Renderizar productos en la vista 'productList' inicio
 
-    getPhones:(req,res)=>{ 
+    getPhones: (req, res) => {
 
         db.Producto.findAll({
-            where:{
-                product_type:"phones"
+            where: {
+                product_type: "phones"
             }
         })
-        .then(function(products){
+            .then(function (products) {
 
-            /* const products = productos; */
+                /* const products = productos; */
 
-            return res.render('productList', {
-            products:products
-        });
+                return res.render('productList', {
+                    products: products
+                });
 
-        })
+            })
 
         /* const products = productModel.findByProduct_type('phones', false) */
-        
-    },  
 
-    getPrinters:(req,res)=>{
+    },
+
+    getPrinters: (req, res) => {
 
         /* const products = productModel.findByProduct_type('printer', false); */
 
         db.Producto.findAll({
-            where:{
+            where: {
                 product_type: "printer"
             }
-        }).then(function(productos){
+        }).then(function (productos) {
 
             const products = productos;
             return res.render('productList', {
-            products
-        });
+                products
+            });
         })
-        
+
     },
 
-    getAccesorios:(req,res)=>{
+    getAccesorios: (req, res) => {
 
         /* const products = productModel.findByProduct_type('accesories', false); */
 
         db.Producto.findAll({
-            where:{
-                product_type: "accesiories"
+            where: {
+                product_type: "accesories"
             }
-        }).then(function(productos){
+        }).then(function (productos) {
 
             const products = productos;
 
             return res.render('productList', {
 
-            products:products
-        });
+                products: products
+            });
         })
 
     },
 
-    getInformatica:(req,res)=>{
+    getInformatica: (req, res) => {
 
         /* const products = productModel.findByProduct_type('software', false); */
 
         db.Producto.findAll({
-            where:{
+            where: {
                 product_type: "software"
             }
-        }).then(function(prodcutos){
+        }).then(function (prodcutos) {
 
             const products = prodcutos;
 
             return res.render('productList', {
-            products:products
-        });
+                products: products
+            });
         })
-        
+
     },
-    
+
     //Renderizar productos en la vista 'productList' fin
 
-    addCart: (req,res)=>{
+    addCart: (req, res) => {
 
         res.send(console.log('hola id: ' + products.id));
     },
-    
-    getDetail:(req,res)=>{
+
+    getDetail: (req, res) => {
 
         const id = Number(req.params.id);
 
         db.Producto.findByPk(id)
-        .then(function(producto){
+            .then(function (producto) {
 
-            const product = producto;
+                const product = producto;
 
-            return res.render('productDetail', {
-            product:product
-        });
-        })
+                return res.render('productDetail', {
+                    product: product
+                });
+            })
 
         /* const product = productModel.findByid(id) */
 
-    }, 
-    
+    },
+
     /* postDetail: (req,res)=>{
 
         let detalleProducto = [];
@@ -127,138 +127,175 @@ const productController = {
        // res.render('productDetail')
     }, */
 
-    createProduct: (req,res)=>{
+    createProduct: (req, res) => {
 
-        res.render('createProduct' , {
-            errors:[],
-            values:[]
+        res.render('createProduct', {
+            errors: [],
+            values: []
         });
 
     },
 
-    addProduct: (req,res)=>{ 
+    addProduct: (req, res) => {
 
         /* const body = '/createProduct'; */
-        
+
         const validations = expressValidator.validationResult(req);
-        
-        if(validations.errors.length > 0){
-            
+
+        if (validations.errors.length > 0) {
+
             res.render('createProduct', {
 
-                errors:validations.errors,
-                values:req.body
+                errors: validations.errors,
+                values: req.body
             });
 
         }
 
         const newProduct = req.body;
 
+        newProduct.imagen = '/images/' + req.file.filename
+
         db.Producto.create({
 
             ...newProduct,
 
-            newProduct: imagen = '/images/' + req.file.filename
-
         });
+/* 
+        let newproductid = db.Producto.findAll({
+            limit:1,
+            where:id,
+            order:[['createdAt','DESC']]
+        })
+            .then(function (producto) { 
 
+                return producto
 
-            /* productModel.createOne(newProduct); */ 
-            
-        return res.redirect('/products/:id/productDetail');
+            }).catch(function(e){
+                return console.log(e)
+            })
+
+            console.log(newproductid)
+
+        return res.redirect('/products/'+newproductid+'/productDetail'); */
+
+        switch (newProduct.product_type) {
+ 
+            case 'phones':
+                return res.redirect('/products/productsPhones');
+            break;
+            case 'printer':
+                return res.redirect('/products/productsPrinters');
+            break;
+            case 'accesories':
+                return res.redirect('/products/productsInformatica');
+            break;
+            case 'software':
+                return res.redirect('/products/productsAccesorios');
+            break;
         
-        
-        /*         if(req.file){
+            default: 
+                break;
+        }
 
-            const validations = 
-        } 
-        */
-
-        /*else { queda pendiente poner un mensaje par avisar que no se agregó una imagen, y
-            refrescar la vista
-            res.status('No se cargó una imagen, intentar nuevamente').send(body);
-        }*/
 
     },
 
-    getUpdate: (req,res)=>{
+    getUpdate: (req, res) => {
 
         const id = Number(req.params.id);
 
         /* const products = productModel.findByid(id) */
 
         db.Producto.findByPk(id)
-        .then(function(producto){
+            .then(function (producto) {
 
-            const products = producto;
-            return res.render('updateProduct', {
+                const products = producto;
 
-            products: products,
-            errors:[],
-            values:[]
-        })
-        })
+                return res.render('updateProduct', {
+
+                    products: products,
+                    errors: [],
+                    values: []
+                })
+            })
 
     },
 
-    updateProduct: (req,res)=>{
+    updateProduct: (req, res) => {
 
         const id = Number(req.params.id);
-        
+
         const validations = expressValidator.validationResult(req);
 
-        if(validations.errors.length > 0){
-            
+        if (validations.errors.length > 0) {
+
             res.render('updateProduct', {
 
-                errors:validations.errors,
-                values:req.body
+                errors: validations.errors,
+                values: req.body
             });
 
         }
 
         // Por el body llega dos veces image porque tiene que leer si no sube imagen
-        
+
         let newData = req.body;
+
+        if (!newData.imagen) {
+
+            db.Producto.findOne({
+                where: {
+                    id: id
+                }
+            }).then(function (producto) {
+
+                return producto.imagen
+
+            }).catch(function (e) {
+                return console.log(e)
+            })
+        }
 
         db.Producto.update({
 
             ...newData
-        },{
-            where:{
-                id:id
+
+        }, {
+            where: {
+                id: id
             }
         })
 
-       /*  newData.image = req.file? '/images/' + req.file.filename : req.body.img */
-        
+        /*  newData.image = req.file? '/images/' + req.file.filename : req.body.img */
+
         /* const product_type = newData.product_type; */
 
         /* productModel.updateByid(id, newData); */
 
-       /*  switch (product_type) {
-
-            case 'phones':
-                return productController.getPhones(req, res);
-            break;
-            case 'printer':
-                return productController.getPrinters(req, res);
-            break;
-            case 'accesories':
-                return productController.getAccesorios(req, res);
-            break;
-            case 'software':
-                return productController.getInformatica(req, res);
-            break;
-        
-            default:
-                break;
-        } */
+        /*  switch (product_type) {
+ 
+             case 'phones':
+                 return productController.getPhones(req, res);
+             break;
+             case 'printer':
+                 return productController.getPrinters(req, res);
+             break;
+             case 'accesories':
+                 return productController.getAccesorios(req, res);
+             break;
+             case 'software':
+                 return productController.getInformatica(req, res);
+             break;
+         
+             default:
+                 break;
+         } */
 
         return res.redirect('/products/:id/productDetail');
-    }, 
+    },
 
-    deleteProduct: (req,res)=>{
+    deleteProduct: (req, res) => {
 
         const id = Number(req.params.id);
 
@@ -266,18 +303,16 @@ const productController = {
 
         db.Producto.destroy({
 
-            where:{
-                id:id
+            where: {
+                id: id
             }
         })
 
-        /* products = productModel.findAll(false) */
-
-        res.render('productList', {products})
+        res.render('productList')
         // Deberia ser un resredirect prductList
     },
 
-    getaddToCart: (req,res)=>{
+    getaddToCart: (req, res) => {
 
         const id = Number(req.params.id);
 
@@ -286,22 +321,22 @@ const productController = {
         const userDataSession = req.session.userLogged;
 
         db.Producto.findByPk(id)
-        .then(function(producto){
+            .then(function (producto) {
 
-            const product = cartadeproducto;
+                const product = cartadeproducto;
 
-            return product
-        })
+                return product
+            })
 
         // Pasar el email a cartManager
 
-      /*   const product_type = products1.product_type;
+        /*   const product_type = products1.product_type;
+  
+          cartProductModel.cartManager(products1 , userDataSession) */
 
-        cartProductModel.cartManager(products1 , userDataSession) */
+        /*  console.log(product_type); */
 
-       /*  console.log(product_type); */
-
-       // PARA QUE EL SWITCH??
+        // PARA QUE EL SWITCH??
 
         /* switch (product_type) {
 
@@ -325,33 +360,33 @@ const productController = {
         return res.redirect('/products/productCart');
     },
 
-    getRemoveFromCart: (req,res)=>{
+    getRemoveFromCart: (req, res) => {
 
         const id = Number(req.params.id);
 
         const userDataSession = req.session.userLogged;
 
-       /*  const cartProducts =  cartProductModel.removeFromCart(id , userDataSession); */
+        /*  const cartProducts =  cartProductModel.removeFromCart(id , userDataSession); */
 
-       db.Cartproduct.update({
+        db.Cartproduct.update({
 
-        
 
-       },{
-        where:{
-            email: userDataSession.email
-        }
-       })
 
-        res.render('productcart',{
+        }, {
+            where: {
+                email: userDataSession.email
+            }
+        })
 
-            cartProducts:[cartProducts]
+        res.render('productcart', {
+
+            cartProducts: [cartProducts]
 
         })
 
     },
 
-    getcleanCart: (req,res)=>{
+    getcleanCart: (req, res) => {
 
         const userDataSession = req.session.userLogged
 
@@ -359,11 +394,11 @@ const productController = {
 
         db.Cartproduct.update({
 
-            productId:[]
+            productId: []
             // Pregunta, el reemplazo por un array vacio elimina los existentes?
 
-        },{
-            where:{
+        }, {
+            where: {
                 email: userDataSession.email
             }
         });
@@ -372,31 +407,31 @@ const productController = {
 
     },
 
-    getCart: (req,res)=>{
+    getCart: (req, res) => {
 
         const userEmailSession = req.session.userLogged.email;
-        
+
         /* let cartProducts = cartProductModel.checkCart(userEmailSession); */
 
         db.Cartproduct.findAll({
-            where:{
-                email:userEmailSession
+            where: {
+                email: userEmailSession
             }
-        }).then(function(cartadeproducto){
+        }).then(function (cartadeproducto) {
 
             const cartProducts = cartadeproducto;
 
-            return res.render('productcart',{
+            return res.render('productcart', {
 
-            cartProducts:[cartProducts]
-            
-        });
+                cartProducts: [cartProducts]
+
+            });
         })
 
-       /*  if(!cartProducts){
-            cartProducts=[]
-        }
-        */
+        /*  if(!cartProducts){
+             cartProducts=[]
+         }
+         */
     }
 }
 
