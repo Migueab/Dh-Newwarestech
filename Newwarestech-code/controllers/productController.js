@@ -161,6 +161,8 @@ const productController = {
             ...newProduct,
 
         });
+
+        res.redirect('/')
 /* 
         let newproductid = db.Producto.findAll({
             limit:1,
@@ -182,16 +184,16 @@ const productController = {
         switch (newProduct.product_type) {
  
             case 'phones':
-                return res.redirect('/products/productsPhones');
+                return res.redirect('/productsPhones');
             break;
             case 'printer':
-                return res.redirect('/products/productsPrinters');
+                return res.redirect('/productsPrinters');
             break;
             case 'accesories':
-                return res.redirect('/products/productsInformatica');
+                return res.redirect('/productsInformatica');
             break;
             case 'software':
-                return res.redirect('/products/productsAccesorios');
+                return res.redirect('/productsAccesorios');
             break;
         
             default: 
@@ -234,17 +236,18 @@ const productController = {
 
                 errors: validations.errors,
                 values: req.body
+                
             });
         }
-
-        let newData = req.body;
 
         if (!newData.imagen) {
 
             db.Producto.findOne({
+
                 where: {
                     id: id
                 }
+
             }).then(function (producto) {
 
                 return producto.imagen
@@ -253,16 +256,23 @@ const productController = {
                 return console.log(e)
             })
         }
+        // Esto es asi porque, si no cambia la imagen, que sea la que habia antes
+    
 
         db.Producto.update({
 
-            ...newData
+            product_type:req.body.product_type,
+            nombre:req.body.nombre,
+            imagen:req.body.imagen,
+            precio:req.body.precio,
+            stock:req.body.stock,
+            descripcion:req.body.descripcion
 
         }, {
             where: {
                 id: id
             }
-        })
+        });
 
         /*  newData.image = req.file? '/images/' + req.file.filename : req.body.img */
 
@@ -289,7 +299,7 @@ const productController = {
                  break;
          } */
 
-        return res.redirect('/products/:id/productDetail');
+        return res.redirect('/products/'+id+'/productDetail');
     },
 
     deleteProduct: (req, res) => {

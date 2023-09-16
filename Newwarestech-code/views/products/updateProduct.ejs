@@ -28,10 +28,10 @@
                 </fieldset>
                 <fieldset>
                     <legend>Elige una Categoria</legend>
-                    <label><input type="radio" name="product_type" value="phones">phones</label>
-                    <label><input type="radio" name="product_type" value="software">software</label>
-                    <label><input type="radio" name="product_type" value="accesories">accesories</label>
-                    <label><input type="radio" name="product_type" value="printer">printer</label>
+                    <label><input type="radio" name="product_type" value="phones" <%= products.product_type === "phones" ? "checked" :""%> >phones</label>
+                    <label><input type="radio" name="product_type" value="software" <%= products.product_type === "software" ? "checked" :""%>>software</label>
+                    <label><input type="radio" name="product_type" value="accesories"<%= products.product_type === "accesories" ? "checked" :""%>>accesories</label>
+                    <label><input type="radio" name="product_type" value="printer" <%= products.product_type === "printer" ? "checked" :""%>>printer</label>
                 </fieldset><br>
                 <fieldset>
                     

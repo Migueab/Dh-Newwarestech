@@ -25,7 +25,7 @@ router.get('/login', guestMiddleware , userController.getLogin);
 router.post('/login' , validationsUserLogin.validateLogInUser , userController.postLogin);
 
 //@GET /users/register
-router.get('/register', guestMiddleware , userController.getRegister);
+router.get('/register', /* guestMiddleware , */ userController.getRegister);
 
 //@Post /users/usersList
 router.post ('/register',[ upload.single('image'), validationsUser.validateCreateUser ], userController.postRegister );

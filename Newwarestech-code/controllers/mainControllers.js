@@ -18,6 +18,7 @@ const controllers = {
     getAdmin: (req, res) => {
 
         db.Usuario.findAll({
+
             where: {
                 usuariotipo: "administrador"
             }
@@ -146,7 +147,7 @@ if (userAdminInLogin) {
 // REGISTRACION del ADMINISTRADOR
 
 getAdminRegister: (req, res) => {
-    
+
     res.render('adminRegister', {
 
         errors: [],
@@ -175,6 +176,7 @@ getAdminRegister: (req, res) => {
         if (!passwordEquality) {
 
             return res.render('register', {
+
                 errors: [{
                     msg: "La contraseña debe coincidir"
                 }],
@@ -182,10 +184,16 @@ getAdminRegister: (req, res) => {
             })
         }
 
+        // El console log es leido correctamente
+
+        // console.log(req.body.email)
+
         db.Usuario.findOne({
+
             where: {
                 email: req.body.email
             }
+
         }).then(function (usuario) {
 
             let usuarioAdminEnBD = usuario;
@@ -202,15 +210,12 @@ getAdminRegister: (req, res) => {
             }
         })
 
-        /* const usuarioAdminEnBD = userAdminModel.findByField('email', req.body.email); */
-
-
         const newUser = {
 
             ...req.body,
+            usuariotipo:"administrador",
             password: bcryptjs.hashSync(req.body.password, 10),
-            confirmpassword: bcryptjs.hashSync(req.body.confirmpassword, 10)
-
+         /*    confirmpassword: bcryptjs.hashSync(req.body.confirmpassword, 10) */
         }
 
         /* userAdminModel.createOne(newUser); */
@@ -219,21 +224,16 @@ getAdminRegister: (req, res) => {
             ...newUser
         })
 
+/* 
         if (newUser) {
-
-            const usuariotipo = "administrador";
 
             db.Cartproduct.create({
 
                 email: req.body.email,
                 usuariotipo: "administrador",
-                productId: []
-                
             })
 
-            /* cartProductModel.createCartProduct(newUser, userClass); */
-
-        }
+        } */
 
         return res.redirect('/admin');
 
@@ -259,8 +259,6 @@ getAdminRegister: (req, res) => {
                 });
 
             })
-
-            /* const userAdmin = userAdminModel.findByField('id', id) */
 
         },
 

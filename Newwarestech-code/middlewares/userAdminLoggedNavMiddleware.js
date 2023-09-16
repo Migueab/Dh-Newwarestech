@@ -9,6 +9,7 @@ function userAdminLoggedNavMiddleware(req,res,next){
 
 
     let userAdminFromCookie = db.Usuario.findOne({
+
         where:{
             usuariotipo:"administrador",
             email: emailInCookie
@@ -19,7 +20,7 @@ function userAdminLoggedNavMiddleware(req,res,next){
 
     }).catch(function(e){
 
-        return console.log("MW : No se encontro el usuario administrador")
+        return console.log(e)
     })
     
     

@@ -23,7 +23,7 @@ function userLoggedNavMiddleware(req,res,next){
 
         }).catch(function(e){
 
-            return console.log("MW : No se encontro el usuario");
+            return console.log(e);
 
         });
 

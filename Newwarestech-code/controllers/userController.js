@@ -67,32 +67,25 @@ const userController = {
 
         }).catch(function (e) {
 
-            return console.log("El usuario no se ha encontrado")
+            return console.log(e)
         });
 
         const newUser = {
 
             ...req.body,
             password: bcryptjs.hashSync(req.body.password, 10),
-            confirmpassword: bcryptjs.hashSync(req.body.confirmpassword, 10),
-            usuariotipo: "cliente"
+            usuariotipo: "cliente",
+            imagen : '/images/' + req.file.filename
         }
 
         db.Usuario.create({
             ...newUser
         })
 
-        /* newUser.image = req.file ? newUser.image = '/images/users/' + req.file.filename : newUser.image = '/images/users/user.png'; */
-        /* userModel.createOne(newUser); */
-
-        /* if(newUser){
-                const userClass = "ClientUser"
-                cartProductModel.createCartProduct(newUser,userClass)
-            } */
-
-        return res.redirect('/users/login');
+        return res.redirect('/');
 
     },
+
     getLogin: (req, res) => {
         res.render('login', {
             errors: [],
