@@ -235,10 +235,7 @@ const productController = {
                 errors: validations.errors,
                 values: req.body
             });
-
         }
-
-        // Por el body llega dos veces image porque tiene que leer si no sube imagen
 
         let newData = req.body;
 
@@ -308,7 +305,8 @@ const productController = {
             }
         })
 
-        res.render('productList')
+        res.redirect('/')
+
         // Deberia ser un resredirect prductList
     },
 

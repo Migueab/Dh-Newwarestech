@@ -47,7 +47,7 @@ const controllers = {
         db.Usuario.findAll({
 
         where: {
-            userType: "adminUser"
+            usuariotipo: "administrador"
         }
     })
     .then(function (usuarios) {
@@ -55,6 +55,10 @@ const controllers = {
         const usersAdmin = usuarios;
 
         return usersAdmin;
+
+    }).catch(function(e){
+
+        return console.log(e);
     })
 
 const validation = expressValidator.validationResult(req);
@@ -62,10 +66,12 @@ const validation = expressValidator.validationResult(req);
 if (validation.errors.length > 0) {
 
     return res.render('admin', {
+
         errors: validation.errors,
         values: req.body,
         usersAdmin: usersAdmin
     });
+
 };
 
 db.Usuario.findOne({
@@ -73,16 +79,23 @@ db.Usuario.findOne({
     where: {
         email: req.body.email
     }
+
 }).then(function (usuario) {
 
     const userAdminInLogin = usuario;
 
     return userAdminInLogin;
+
+}).catch(function(e){
+
+   return console.log(e)
+
 })
 
 if (!userAdminInLogin) {
 
     return res.render('admin', {
+
         errors: [{
             msg: 'Este email no se encuentra registrado'
         }],
@@ -94,6 +107,7 @@ if (!userAdminInLogin) {
 if (userAdminInLogin) {
 
     db.Usuario.findOne({
+
         where: {
             email: req.body.email
         }
@@ -130,7 +144,9 @@ if (userAdminInLogin) {
     },
 
 // REGISTRACION del ADMINISTRADOR
+
 getAdminRegister: (req, res) => {
+    
     res.render('adminRegister', {
 
         errors: [],
