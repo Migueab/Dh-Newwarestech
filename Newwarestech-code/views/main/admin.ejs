@@ -37,13 +37,13 @@
                                     </ul>
                                 </div>
 
-                                <% if (!locals.adminIsLogged) { %>
+                                <%  if (!locals.adminIsLogged) { %>
 
                                     <% if (locals.isLogged) { %>
                                         <h3 style="color: red;">Debe cerrar la sesion de usuario previamente para inciar sesion como administrador.</h3>
                                         <br>
-                                        <% } %>
-                                    <% if (!locals.isLogged) { %>
+                                        <%  } %>
+                                    <%  if (!locals.isLogged) { %>
 
                                      <form action="/admin" method="post">
                                          <div>
@@ -68,8 +68,8 @@
                                         <br>
                                         <br>
                                     </div>
-                                    <% } %>
-        <% }else{%>
+                                    <% }  %>
+        <%  }else{ %>
 
             <div>
                 <br>
@@ -95,13 +95,16 @@
 
             <h3>USUARIOS ADMINISTRADORES</h3>
             <p style="color: green;"> * El perfil de los usuarios adminstradores son modificables unicamente desde la sesion del mismo.</p>
+           
             <% usersAdmin.forEach(elemento=>{%>
+
                 <%if(elemento.email === session.email){%>
                     <br>
                     <a href="/updateadminuser/<%= elemento.id %>"><%= elemento.email %></a>
                     <% } %>
                 <%});%>
                 <br>
+
                 <% usersAdmin.forEach(elemento=>{%>
                     <br>
                     <%= elemento.email %>
@@ -111,7 +114,7 @@
                     <br>
                     <br>
                     
-                    <%}%>
+                    <% } %>
                     <%- include('../partials/footer') %>
 </body>
 

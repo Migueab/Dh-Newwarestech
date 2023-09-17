@@ -138,8 +138,6 @@ const productController = {
 
     addProduct: (req, res) => {
 
-        /* const body = '/createProduct'; */
-
         const validations = expressValidator.validationResult(req);
 
         if (validations.errors.length > 0) {
@@ -162,7 +160,8 @@ const productController = {
 
         });
 
-        res.redirect('/')
+        /* res.redirect('/') */
+
 /* 
         let newproductid = db.Producto.findAll({
             limit:1,
@@ -183,16 +182,16 @@ const productController = {
 
         switch (newProduct.product_type) {
  
-            case 'phones':
+            case "phones":
                 return res.redirect('/productsPhones');
             break;
-            case 'printer':
+            case "printer":
                 return res.redirect('/productsPrinters');
             break;
-            case 'accesories':
+            case "accesories":
                 return res.redirect('/productsInformatica');
             break;
-            case 'software':
+            case "software":
                 return res.redirect('/productsAccesorios');
             break;
         

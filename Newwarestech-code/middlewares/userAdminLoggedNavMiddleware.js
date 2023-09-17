@@ -7,34 +7,32 @@ function userAdminLoggedNavMiddleware(req,res,next){
 
     let emailInCookie = req.cookies.emailAdmin;
 
-    console.log( "This"+emailInCookie)
-
-    let userAdminFromCookie = db.Usuario.findOne({
+    db.Usuario.findOne({
 
         where:{
             email: emailInCookie
         }
     }).then(function(usuario){
 
-        return usuario
+        let userAdminFromCookie = usuario;
+
+        if(userAdminFromCookie){ 
+    
+            return req.session.userAdminLogged = userAdminFromCookie;
+        }
+    
 
     }).catch(function(e){
 
         return console.log(e)
     })
     
-    
-        if(userAdminFromCookie){ 
-
-            req.session.userAdminLogged = userAdminFromCookie;
-        }
-
     if(req.session.userAdminLogged){
        
         res.locals.adminIsLogged=true;
         res.locals.adminUserLogged = req.session.userAdminLogged;
        
-    }
+        }
 
     next();
 }

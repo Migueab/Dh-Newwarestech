@@ -43,47 +43,62 @@ const controllers = {
     //Login de administrador
     postAdmin: (req, res) => {
 
+        let emailadministrador = req.body.email;
+
+        // Primer findall es para la validacion
         db.Usuario.findAll({
 
             where: {
-                usuariotipo: "administrador"
+                usuariotipo: "administrador",
+                email : emailadministrador
             }
         })
-            .then(function (usuarios) {
+            .then(function (usuario) {
 
-                const usersAdmin = usuarios;
+                const usersAdmin = usuario;
 
-                return usersAdmin;
+                const validation = expressValidator.validationResult(req);
+        
+                if (validation.errors.length > 0) {
+        
+                    return res.render('admin', {
+        
+                        errors: validation.errors,
+                        values: req.body,
+                        session: req.session.userAdminLogged,
+                        usersAdmin: usersAdmin
+                    });
+        
+                };
 
             }).catch(function (e) {
 
                 return console.log(e);
-            })
-
-        const validation = expressValidator.validationResult(req);
-
-        if (validation.errors.length > 0) {
-
-            return res.render('admin', {
-
-                errors: validation.errors,
-                values: req.body,
-                usersAdmin: usersAdmin
             });
 
-        };
 
         db.Usuario.findOne({
 
             where: {
-                email: req.body.email
+                email: emailadministrador
             }
 
         }).then(function (usuario) {
 
             const userAdminInLogin = usuario;
 
-            return userAdminInLogin;
+            if (!userAdminInLogin) {
+    
+                return res.render('admin', {
+    
+                    errors: [{
+                        msg: 'Este email no se encuentra registrado'
+                    }],
+                    values: req.body,
+                    usersAdmin : [],
+                    session:[]
+                })
+            }
 
         }).catch(function (e) {
 
@@ -91,33 +106,18 @@ const controllers = {
 
         })
 
-        if (!userAdminInLogin) {
+        db.Usuario.findOne({
 
-            return res.render('admin', {
+            where: {
+                email: emailadministrador
+            }
 
-                errors: [{
-                    msg: 'Este email no se encuentra registrado'
-                }],
-                values: req.body,
-                usersAdmin
-            })
-        }
+        }).then(function (usuario) {
 
-        if (userAdminInLogin) {
-
-            db.Usuario.findOne({
-
-                where: {
-                    email: req.body.email
-                }
-            }).then(function (usuario) {
-
-                const passwordCoincid = bcryptjs.compareSync(req.body.password, usuario.password);
-
-                return passwordCoincid;
-            })
-
-            if (passwordCoincid) {
+            const userAdminInLogin = usuario;
+            const passwordCoincid = bcryptjs.compareSync(req.body.password, userAdminInLogin.password);
+        
+        if (userAdminInLogin && passwordCoincid) {
 
                 delete userAdminInLogin.password;
                 delete userAdminInLogin.id;
@@ -129,17 +129,41 @@ const controllers = {
                 req.session.userAdminLogged = userAdminInLogin;
 
                 return res.redirect('/admin');
-
-            } else {
-
-                return res.render('admin', {
-                    errors: [{
-                        msg: 'Contraseña incorrecta'
-                    }],
-                    values: req.body,
-                });
-            };
         }
+            
+    }).catch(function(e){
+
+        return console.log(e)
+    })
+
+    db.Usuario.findOne({
+
+        where: {
+            email: emailadministrador
+        }
+
+    }).then(function (usuario) {
+
+        const userAdminInLogin = usuario;
+        const passwordCoincid = bcryptjs.compareSync(req.body.password, userAdminInLogin.password);
+    
+        if (userAdminInLogin && !passwordCoincid){
+
+            return res.render('admin', {
+                errors: [{
+                    msg: 'Contraseña incorrecta'
+                }],
+                values: req.body,
+                session: [],
+                usersAdmin : []
+            });
+        };
+
+    }).catch(function(e){
+        return console.log(e)
+    })
+
+
     },
 
     // REGISTRACION del ADMINISTRADOR

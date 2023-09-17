@@ -11,7 +11,7 @@ function userLoggedNavMiddleware(req,res,next){
 
     let emailInCookie = req.cookies.emailUser;
 
-    let userFromCookie = db.Usuario.findOne({
+    db.Usuario.findOne({
         where:{
 
             usuariotipo : "cliente",
@@ -19,21 +19,19 @@ function userLoggedNavMiddleware(req,res,next){
 
         }}).then(function(usuario){
 
-            return usuario;
+            let userFromCookie = usuario;
+
+            if(userFromCookie){ 
+
+                return req.session.userLogged = userFromCookie;
+             }
 
         }).catch(function(e){
 
             return console.log(e);
 
         });
-
-
-    /* userModel.findByField('email',emailInCookie); */
     
-        if(userFromCookie){ 
-
-            req.session.userLogged = userFromCookie;
-        }
 
 /* Verificando */
 
