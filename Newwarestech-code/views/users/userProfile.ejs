@@ -20,7 +20,7 @@
             <article class="article">
                 
                 <label>Foto</label>
-                <img src="<%= user.image %>" alt="">
+                <img src="<%= user.imagen %>" alt="">
                 
                 <label for="name">Nombre</label>
                 <input type="text" name="nombre" value="<%= user.nombre %>" readonly> 
@@ -32,7 +32,7 @@
                 <input type="text" name="email" value="<%= user.email %>" readonly> 
                 
                 <label for="categoria">Categoria</label>
-                <input type="text" name="categoria" value="<%= user.category %>" readonly> 
+                <input type="text" name="categoria" value="<%= user.product_type %>" readonly> 
                 
                 <div class="botones">
                     <a href="/users/<%= user.id %>/updateuser"><input type="button" value="Editar Usuario"></a> 

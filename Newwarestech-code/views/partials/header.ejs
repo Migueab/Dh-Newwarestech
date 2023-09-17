@@ -13,11 +13,11 @@
       <% if (locals.adminIsLogged) { %>
         <a href="/productAdminCart"><i class="fa-solid fa-cart-shopping"></i> </a>
         <% }%>
-        
-        <a href="/users/userprofile"><i class="fa-solid fa-user"></i></a>
-        <a href="/users/logout"><i class="fa-solid fa-arrow-right-from-bracket"></i></a> 
+
         <% if (locals.isLogged && !locals.adminIsLogged) { %>
-        <% }%>
+          <% }%>
+          <a href="/users/userprofile"><i class="fa-solid fa-user"></i></a>
+          <a href="/users/logout"><i class="fa-solid fa-arrow-right-from-bracket"></i></a> 
 
         <a href="/users/login"> <i class="fa-solid fa-circle-user"></i></a>
         <a href="/users/register"><i class="fa-solid fa-user-plus"></i></a> 

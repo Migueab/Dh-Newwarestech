@@ -20,7 +20,7 @@ const upload = multer({storage});
 
 
 //@GET /users/login
-router.get('/login', guestMiddleware , userController.getLogin);
+router.get('/login', /* guestMiddleware , */  userController.getLogin);
 
 router.post('/login' , validationsUserLogin.validateLogInUser , userController.postLogin);
 

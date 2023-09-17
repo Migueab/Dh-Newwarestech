@@ -87,10 +87,12 @@ const userController = {
     },
 
     getLogin: (req, res) => {
+
         res.render('login', {
             errors: [],
             values: []
         });
+
     },
 
     postLogin: (req, res) => {
@@ -127,7 +129,7 @@ const userController = {
 
         }).catch(function (e) {
 
-            return console.log("El usuario en login no se encuentra")
+            return console.log(e)
         });
 
         db.Usuario.findOne({
@@ -155,7 +157,7 @@ const userController = {
 
                     req.session.userLogged = userInLogin;
 
-                    return res.redirect('/products/productCart');
+                    return res.redirect('/');
 
                 } else {
 
@@ -188,15 +190,16 @@ const userController = {
 
         }).catch(function(e){
 
-            return console.log("Los usuarios no fueron encontrados")
+            return console.log(e)
         })
 
     },
 
     getUserProfile: (req, res) => {
-
-        /* const user = userModel.findByField('email', req.session.userLogged.email) */
+        
         const userDataSession = req.session.userLogged;
+
+        console.log(userDataSession)
 
         db.Usuario.findOne({
             where:{

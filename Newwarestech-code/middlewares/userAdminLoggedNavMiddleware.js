@@ -7,11 +7,11 @@ function userAdminLoggedNavMiddleware(req,res,next){
 
     let emailInCookie = req.cookies.emailAdmin;
 
+    console.log( "This"+emailInCookie)
 
     let userAdminFromCookie = db.Usuario.findOne({
 
         where:{
-            usuariotipo:"administrador",
             email: emailInCookie
         }
     }).then(function(usuario){
@@ -24,14 +24,10 @@ function userAdminLoggedNavMiddleware(req,res,next){
     })
     
     
-    
-    /* userAdminModel.findByField('email',emailInCookie); */
-    
         if(userAdminFromCookie){ 
 
             req.session.userAdminLogged = userAdminFromCookie;
         }
-
 
     if(req.session.userAdminLogged){
        
@@ -42,8 +38,6 @@ function userAdminLoggedNavMiddleware(req,res,next){
 
     next();
 }
-
-
 
 
 module.exports= userAdminLoggedNavMiddleware;
