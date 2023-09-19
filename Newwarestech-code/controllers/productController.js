@@ -323,46 +323,28 @@ const productController = {
 
         const id = Number(req.params.id);
 
-        /* let products1 = productModel.findByid(id) */
+        console.log(req.params.id)
 
         const userDataSession = req.session.userLogged;
+
+        db.Carrito.findOne({
+
+            where:{
+                usuarios_id : 1
+            }
+
+        }).then(function(carrito){
+
+            return carrito
+        })
 
         db.Producto.findByPk(id)
             .then(function (producto) {
 
-                const product = cartadeproducto;
 
-                return product
+                return producto
             })
 
-        // Pasar el email a cartManager
-
-        /*   const product_type = products1.product_type;
-  
-          cartProductModel.cartManager(products1 , userDataSession) */
-
-        /*  console.log(product_type); */
-
-        // PARA QUE EL SWITCH??
-
-        /* switch (product_type) {
-
-            case 'phones':
-                return productController.getPhones(req, res);
-            break;
-            case 'printer':
-                return productController.getPrinters(req, res);
-            break;
-            case 'accesories':
-                return productController.getAccesorios(req, res);
-            break;
-            case 'software':
-                return productController.getInformatica(req, res);
-            break;
-        
-            default:
-                break;
-        } */
 
         return res.redirect('/products/productCart');
     },
@@ -415,30 +397,40 @@ const productController = {
     },
 
     getCart: (req, res) => {
+  
 
-        const userEmailSession = req.session.userLogged.email;
+        db.Usuario.findOne({
 
-        /* let cartProducts = cartProductModel.checkCart(userEmailSession); */
-
-        db.Cartproduct.findAll({
-            where: {
-                email: userEmailSession
+            where:{
+                email: req.session.userLogged.email
             }
-        }).then(function (cartadeproducto) {
 
-            const cartProducts = cartadeproducto;
+        }).then(function(usuario){
 
-            return res.render('productcart', {
+            let carritoEncontrado = db.Carrito.findAll({
+                where: {
+                    usuarios_id: usuario.id
+                }
+            })
+                return carritoEncontrado
 
-                cartProducts: [cartProducts]
-
-            });
         })
+        .then(function (carrito) {
+    
+                const cartProduct = carrito;
+    
+                return res.render('productcart', {
+    
+                    cartProducts: cartProduct
+    
+                });
 
-        /*  if(!cartProducts){
-             cartProducts=[]
-         }
-         */
+            }).catch(function(e){
+    
+                return console.log(e)
+            });
+        
+
     }
 }
 

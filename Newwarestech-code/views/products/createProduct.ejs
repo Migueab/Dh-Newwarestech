@@ -10,8 +10,8 @@
                     <ul>
                         <% errors.forEach(elemento=>{%>
                         <li>
-                               <%= elemento.msg%>
-                            </li>
+                            <%= elemento.msg%>
+                        </li>
 
                             <% })%> 
                     </ul>
@@ -23,21 +23,23 @@
             <fieldset>
                 <legend>Elige una Categoria</legend>
                 
+              
+            </fieldset><br>
                 <div>
                     <label for="product_type">Phones</label>
-                    <input type="radio" name="product_type" id="product_type" value="phones">
+                    <input type="radio" name="product_type" id="product_type" value="phones" <%= values.product_type === "phones" ? "checked" :""%>>
                 </div>
                 <div>
                     <label for="product_type">Software</label>
-                    <input type="radio" name="product_type" id="product_type" value="software">
+                    <input type="radio" name="product_type" id="product_type" value="software" <%= values.product_type === "software" ? "checked" :""%>>
                 </div>
                 <div>
                     <label for="product_type">Accesories</label>
-                    <input type="radio" name="product_type" id="product_type"  value="accesories">
+                    <input type="radio" name="product_type" id="product_type"  value="accesories" <%= values.product_type === "accesories" ? "checked" :""%>>
                 </div>
                 <div>
                     <label for="product_type">Printer</label>
-                    <input type="radio" name="product_type" id="product_type" value="printer">
+                    <input type="radio" name="product_type" id="product_type" value="printer" <%= values.product_type === "printer" ? "checked" :""%>>
                 </div>
             </fieldset><br>
             <fieldset>

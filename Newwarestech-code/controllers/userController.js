@@ -70,17 +70,41 @@ const userController = {
             return console.log(e)
         });
 
-        const newUser = {
+
+
+        let newUser = {
 
             ...req.body,
             password: bcryptjs.hashSync(req.body.password, 10),
             usuariotipo: "cliente",
-            imagen : '/images/' + req.file.filename
         }
+
+        newUser.imagen ? '/images/' + req.file.filename :'/images/users/user.png';
+
 
         db.Usuario.create({
             ...newUser
         })
+
+
+        if(newUser){
+
+            db.Usuario.findOne({
+                where:{
+                    email:newUser.email
+                }
+            }).then(function(nuevousuario){
+
+                
+                return db.Carrito.create(
+
+                    usuarios_id = nuevousuario.id
+                );
+
+            }).catch(function(e){
+                return console.log(e)
+            })
+        }
 
         return res.redirect('/');
 
@@ -107,10 +131,9 @@ const userController = {
             })
         }
 
-        /* const userInLogin = userModel.findByField('email',req.body.email); */
-
         db.Usuario.findOne({
             where: {
+                usuariotipo:"cliente",
                 email: req.body.email
             }
         }).then(function (usuario) {
@@ -135,6 +158,7 @@ const userController = {
         db.Usuario.findOne({
 
             where: {
+                usuariotipo:"cliente",
                 email: req.body.email
             }
             
@@ -196,7 +220,7 @@ const userController = {
     },
 
     getUserProfile: (req, res) => {
-        
+
         const userDataSession = req.session.userLogged;
 
         console.log(userDataSession)
@@ -225,6 +249,8 @@ const userController = {
 
         const id = Number(req.params.user);
 
+        console.log(id)
+
         /* const users = userModel.findByid(id) */
 
         db.Usuario.findOne({
@@ -239,7 +265,7 @@ const userController = {
                 users: users
             })
         }).catch(function(e){
-            return console.log("La informacion del usuario no se encontro")
+            return console.log(e)
         });
 
     },
@@ -252,7 +278,11 @@ const userController = {
 
         db.Usuario.update({
 
-            ...newData
+            nombre: req.body.nombre,
+            apellido:req.body.apellido,
+            telefono: req.body.telefono,
+            direccion: req.body.direccion,
+            imagen: req.body.imagen
         },{
             where:{
                 id:id

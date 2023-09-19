@@ -75,14 +75,15 @@ module.exports= function(sequelize,dataTypes){
             as: "transporte",
             foreignKey : "producto_id"
         }) 
-        
-        Producto.belongsToMany(models.Cartproduct,{
-            as: "cartproducts",
-            through:"cartproduct_producto",
-            foreignKey : "producto_id",
-            otherKey : "cartproduct_id",
-            timestamps:false
-        }); */
+        */
+
+        Producto.belongsToMany(models.Carrito,{
+            as: "carritos",
+            through:"carrito",
+            foreignKey : "productos_id",
+            otherKey : "carrito_id",
+            timestamps:true
+        }); 
 
     }
 

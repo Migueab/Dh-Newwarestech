@@ -7,10 +7,12 @@ validationsUser={
     validateCreateUser:[
 
         expressValidator.body('nombre')
-        .notEmpty().withMessage('El nombre no deberia estar vacio'),
+        .notEmpty().withMessage('El nombre no deberia estar vacio')
+        .isLength({min:2,max:50}).withMessage('El nombre debe contener mas de dos caracteres'),
         
         expressValidator.body('apellido')
-        .notEmpty().withMessage('El apellido no deberia estar vacio'),
+        .notEmpty().withMessage('El apellido no deberia estar vacio')
+        .isLength({min:2,max:50}).withMessage('El apellido debe contener mas de dos caracteres'),
 
         expressValidator.body('email')
         .notEmpty().withMessage('El email no deberia estar vacio')

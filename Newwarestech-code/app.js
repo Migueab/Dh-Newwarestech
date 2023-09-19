@@ -17,7 +17,7 @@ const userAdminLoggedNavMiddleware = require('./middlewares/userAdminLoggedNavMi
 // Requiriendo rutas
 const mainRoutes = require('./routes/mainRoutes');
 const userRoutes = require('./routes/userRoutes');
-const productRoutes = require('./routes/productRoutes'); 
+const productRoutes = require('./routes/productRoutes');
 
 
 // Especificando rutas de vistas

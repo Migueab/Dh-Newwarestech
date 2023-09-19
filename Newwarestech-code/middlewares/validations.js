@@ -18,7 +18,8 @@ const validations={
         
         expressValidator.body('descripcion')
         .notEmpty()
-        .withMessage('Escriba la descripción del producto'),
+        .withMessage('Escriba la descripción del producto')
+        .isLength({min:20,max:100}).withMessage('La descripcion debe contener mas de 20 caracteres'),
 
         expressValidator.body('imagen')
         .notEmpty()

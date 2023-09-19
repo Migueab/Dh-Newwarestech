@@ -10,6 +10,7 @@ function userAdminLoggedNavMiddleware(req,res,next){
     db.Usuario.findOne({
 
         where:{
+            usuariotipo : "administrador",
             email: emailInCookie
         }
     }).then(function(usuario){
@@ -27,6 +28,9 @@ function userAdminLoggedNavMiddleware(req,res,next){
         return console.log(e)
     })
     
+
+    /* Verificando */
+
     if(req.session.userAdminLogged){
        
         res.locals.adminIsLogged=true;

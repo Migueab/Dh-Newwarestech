@@ -1,7 +1,7 @@
 module.exports= function(sequelize,dataTypes){
 
     // El alias es el nombre como queremos llamar a la tabla
-    let alias = "Cartproduct";
+    let alias = "Carrito";
 
     let cols = {
         // minimo en estas columnas es type
@@ -13,15 +13,19 @@ module.exports= function(sequelize,dataTypes){
         // Deberia ser un email. 
         // Tipo de usuario: cliente o administrador
         // Array de ID de productos seleccionados. figuraran en el Cartporduct
-        productos_carrito_id:{
+        productos_id:{
             type:dataTypes.INTEGER
         },
-        usuarios_carrito_id:{
+        usuarios_id:{
             type:dataTypes.INTEGER
         },
-        bancos_carrito_id:{
+        cantidad:{
             type:dataTypes.INTEGER
         }
+        /* ,
+        bancos_carrito_id:{
+            type:dataTypes.INTEGER
+        } */
         
     }
 
@@ -31,22 +35,23 @@ module.exports= function(sequelize,dataTypes){
         paranoid : true
     }
 
-    let Cartproduct = sequelize.define(alias,cols,config);
+    let Carrito = sequelize.define(alias,cols,config);
 
-    Cartproduct.associate = function (models){
+    Carrito.associate = function (models){
         // has many quiere decir que categoria tiene muchos productos 
 
         // en models se usa Producto, porque asi usamos en el alias ("as")
         // el as de esta tabla es como se llama la asociacion
         
-        /* Cartproduct.belongsToMany (models.Usuario,{
+        Carrito.belongsToMany (models.Usuario,{
             as: "usuarios",
-            through:"cartproduct_usuario",
-            foreignKey : "cartproduct_id",
+            through:"carrito",
+            foreignKey : "carrito_id",
             otherKey : "usuario_id",
-            timestamps:false
+            timestamps:true
         });
-        
+
+        /* 
         Cartproduct.belongsToMany(models.Producto,{
             as: "productos",
             through:"cartproduct_producto",
@@ -66,7 +71,5 @@ module.exports= function(sequelize,dataTypes){
 
     };
 
-
-
-    return Cartproduct;
+    return Carrito;
 };

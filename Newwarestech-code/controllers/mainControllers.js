@@ -80,6 +80,7 @@ const controllers = {
         db.Usuario.findOne({
 
             where: {
+                usuariotipo: "administrador",
                 email: emailadministrador
             }
 
@@ -109,6 +110,7 @@ const controllers = {
         db.Usuario.findOne({
 
             where: {
+                usuariotipo: "administrador",
                 email: emailadministrador
             }
 
@@ -139,6 +141,7 @@ const controllers = {
     db.Usuario.findOne({
 
         where: {
+            usuariotipo: "administrador",
             email: emailadministrador
         }
 
@@ -253,6 +256,7 @@ const controllers = {
         
                         email: req.body.email,
                         usuariotipo: "administrador",
+                     
                     })
         
                 } */
@@ -335,152 +339,6 @@ const controllers = {
         res.clearCookie('emailAdmin');
 
         res.redirect('/admin');
-
-    },
-
-    getAdminCart: (req, res) => {
-
-        const userEmailSession = req.session.userAdminLogged.email;
-
-        db.Cartproduct.findOne({
-            where: {
-                email: userEmailSession
-            }
-        }).then(function (cartproduct) {
-
-            cartAdminProducts = cartproduct;
-
-            if (!cartAdminProducts) {
-
-                return cartAdminProducts = []
-            }
-
-            return res.render('productcart', {
-
-                cartAdminProducts: cartAdminProducts
-
-            })
-        })
-
-        /* let cartAdminProducts = cartProductModel.checkCart(userEmailSession); */
-
-    },
-
-    addAdminCart: (req, res) => {
-
-        res.send(console.log('hola id: ' + products.id));
-
-    },
-
-    getAdminaddToCart: (req, res) => {
-
-        const id = Number(req.params.id);
-
-        /* let products1 = productModel.findByid(id) */
-
-        db.Producto.findOne({
-            where: {
-                id: id
-            }
-        }).then(function (porducto) {
-
-            const producto = producto;
-
-            return producto;
-        })
-
-        // Hay que preguntar a la carta de producto
-        // Carta de producto, donde email
-        // Esta el producto que quiere agregar?
-        // Como es un array se le puede preguntar includes if true
-        // Si no esta lo suma con update en productId . push
-        // Si esta ya lo tiene
-
-        db.Cartproduct.findOne({
-
-            where: {
-                email: req.session.userAdminLogged.email
-            }
-        }).then(function (cartadeproducto) {
-
-            const cartproduct = cartadeproducto;
-
-            return cartproduct;
-        })
-
-        if (cartproduct.productId.includes(producto) === false) {
-
-            db.Cartproduct.update({
-
-                productId: productId.push(producto)
-            }, {
-                where: {
-                    email: req.session.userAdminLogged.email
-                }
-            })
-        } else {
-
-            return res.redirect('/productAdminCart')
-        }
-
-
-        return res.redirect('/productAdminCart')
-
-        // Pasar el email a cartManager
-        /*   cartProductModel.cartManager(products1, userDataSession) */
-
-    },
-
-    getAdminRemoveFromCart: (req, res) => {
-
-        const id = Number(req.params.id);
-
-        const userDataSession = req.session.userAdminLogged;
-
-        db.Cartproduct.destroy({
-
-            productId: id
-        }, {
-            where: {
-                email: userDataSession.email
-            }
-        }).then(function (cartadeproducto) {
-
-            const cartAdminProducts = cartadeproducto;
-
-            return res.render('productcart', {
-
-                cartAdminProducts: [cartAdminProducts]
-
-            })
-
-        })
-
-        /* const cartAdminProducts = cartProductModel.removeFromCart(id, userDataSession); */
-
-    },
-
-    getAdmincleanCart: (req, res) => {
-
-        const userDataSession = req.session.userAdminLogged;
-
-        db.Cartproduct.destroy({
-            productId
-        }, {
-            where: {
-                email: userDataSession.email
-            }
-        }).then(function (cartadeproducto) {
-
-            const cartAdminProducts = cartadeproducto;
-
-            return res.render('productcart', {
-
-                cartAdminProducts
-            });
-        })
-
-        /* const cartAdminProducts = cartProductModel.cleanCart(userDataSession); */
 
     },
 

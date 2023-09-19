@@ -31,9 +31,11 @@
             <p>Fabricante:</p>
             <p>Descripción:</p> <p><%= product.descripcion %></p>
             
-            <% if (locals.IsLogged) { %>
-            <a href="/products/<%= product.id %>/addToCart"><input type="button" value="Agregar al carrito"></a> 
-            <% } %>
+            <%  if (locals.isLogged ) {  %>
+              <a href="/products/<%= product.id %>/addToCart"><input type="button" value="Agregar al carrito"></a> 
+            
+              <%  } %>
+
             <% if (locals.adminIsLogged) { %>
               <div>
                 <a href="/<%= product.id %>/addToAdminCart"><input type="button" value="Agregar al carrito"></a> 
