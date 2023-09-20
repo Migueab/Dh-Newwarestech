@@ -397,12 +397,15 @@ const productController = {
     },
 
     getCart: (req, res) => {
-  
+        
+        let emailSession 
+
+        // Hay que establecer la condicion de la session por uno u otro tipo de usuarios
 
         db.Usuario.findOne({
 
             where:{
-                email: req.session.userLogged.email
+                email: emailSession
             }
 
         }).then(function(usuario){
@@ -418,11 +421,12 @@ const productController = {
         .then(function (carrito) {
     
                 const cartProduct = carrito;
+                const cartAdminProducts = carrito;
     
                 return res.render('productcart', {
     
-                    cartProducts: cartProduct
-    
+                    cartProducts: cartProduct,
+                    cartAdminProducts : cartAdminProducts
                 });
 
             }).catch(function(e){

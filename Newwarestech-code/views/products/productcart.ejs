@@ -18,8 +18,10 @@
     <main>
         <section class="productos">
             <div class="productos-items">
+               
+                <% if(locals){ %>
                 
-                <% if (locals.IsLogged) { %>     
+               <% if (locals.IsLogged) { %>     
                 <% cartProducts.forEach(elemento=>{%>
                     <p><%= elemento.name %></p>
                     <img src=<%= elemento.image %> alt="img">
@@ -37,15 +39,15 @@
                         <article class="article">
                             
                                 <div>
-                                    <p><%= elemento.name %></p>
-                                    <img src="<%= elemento.image %>" alt="img">
+                                    <p><%= elemento.nombre %></p>
+                                    <img src="<%= elemento.imagen %>" alt="img">
                                     <p><%= elemento.price %></p>
                                 </div>
                                 <button><a href="/<%= elemento.id %>/removeFromAdminCart">Eliminar
                                     producto</a></button>
                                     <% }) %>
                                     <%} %>
-                                    
+                                    <% } %>
                         </article>
                 </div>
                 <div class="carrito">
