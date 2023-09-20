@@ -14,21 +14,70 @@
     <div class="contenedor">
         <%- include('../partials/header') %>
         <section class="main">
-            <div class="carrousel">
-                <div class="elemento">
-                    <img src="images/iphone.png" alt="" /> 
+            <div id="completo-carrousel">
+                <div class="carrousel" id="carrousel1">
+                    <div class="imgcarr1" id="imgcarr1"> 
+                        <img class="imgcar" src="images/carrousel/celulares.jpg" alt="" />
+                    </div>
+                    <div class="flechas">
+                       <a href="#carrousel3">
+                        <i class="fa-solid fa-chevron-left" style="color: #030303;"></i>
+                       </a>
+                      <a href="#carrousel2">
+                     <i class="fa-solid fa-chevron-right" style="color: #000000;"></i> 
+                      </a>
+                    </div>
+                </div>
+                <div class="carrousel" id="carrousel2">
+                    <div class="imgcarr2" id="imgcarr2"> 
+                        <img class="imgcar" src="images/carrousel/impresora.jpeg" alt="" />
+                    </div>
+                    <div class="flechas">
+                        <a href="#carrousel1">
+                            <i class="fa-solid fa-chevron-left" style="color: #030303;"></i> 
+                            </a>
+                           <a href="#carrousel3">
+                            <i class="fa-solid fa-chevron-right" style="color: #000000;"></i>
+                           </a>
+                    </div>
+                </div>
+                <div class="carrousel" id="carrousel3">
+                    <div class="imgcarr3" id="imgcarr3"> 
+                        <img class="imgcar" src="images/carrousel/parlantes.jpeg" alt="" /> 
+                    </div>
+                    <div class="flechas">
+                        <a href="#carrousel2">
+                            <i class="fa-solid fa-chevron-left" style="color: #030303;"></i>
+                            </a>
+                           <a href="#carrousel1">
+                            <i class="fa-solid fa-chevron-right" style="color: #000000;"></i>
+                           </a>
+                        </div>
+                    </div>
+                </div>
+                <div id="puntoscarrousel">
+                    <a href="#carrousel1"> ° </a>
+                    <a href="#carrousel2"> ° </a>
+                    <a href="#carrousel3"> ° </a>
+                </div>
+                    
+                <!-- <div class="elemento">
+                    <img src="images/carrousel/huawei1.png" alt="" />
+                </div>
+                    <div class="flechas-carrousel">
+                        <i> I </i>
+                        <i> D </i>
+                    </div>
                 </div>
                 <div class="elemento">
-                    <img src="images/impresora.png" alt="" /> 
+                    <img src="images/carrousel/auriculares1.png" alt="" /> 
+                </div>
+                <div class="flechas-carrousel">
+                    <i> I </i>
+                    <i> D </i>
                 </div>
                 <div class="elemento">
-                    <img src="images/powerpoint.png" alt="" />
-                </div>
-                <div class="elemento">
-                    <img src="images/webcam-redonda.png" alt="" />
-                </div>
-                <div class="elemento">
-                    <img src="images/adobe-photoshop.png" alt="" /> 
+                    <img src="images/carrousel/impresora_2.png" alt="" />
                 </div>
             </div>
             <div class="contenedor-promociones">
@@ -39,18 +88,17 @@
                     <div class="texto">
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem!</p>
                     </div>
-                </div>
-                <div class="promociones">
+                </div> -->
+                <!-- <div class="promociones">
                     <div class="img">
                         <img src="images/desktop.png" alt="" /> 
                     </div>
                     <div class="texto">
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem!</p>
                     </div>
-                </div>   
-            </div>
+                </div>    -->
         </section>
         <%- include('../partials/footer') %>
     </div>
+    </html>
 </body>
-</html>

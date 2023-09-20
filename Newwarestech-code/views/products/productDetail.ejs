@@ -26,11 +26,11 @@
             <img src="<%= product.image %>" alt="img">            
           </div>
           <div class="main2">
-            <p>Nombre del producto: <%= product.name %></p>
-            <p>Precio: <%= product.price %> </p>
-            <p>Fabricante:</p>
-            <p>Descripción:</p> <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam ipsa omnis, adipisci assumenda at totam nihil provident, ducimus eius ipsam, facilis sapiente ab fugit. Quas deserunt illum sit officiis atque.</p>
-            
+            <p>NOMBRE DEL PRODUCTO: <%= product.name %></p>
+            <p>PRECIO: <%= product.price %> </p>
+            <p> COLOR: </p>
+            <p> CANTIDAD </p>
+           
             <% if (locals.IsLogged) { %>
             <a href="/products/<%= product.id %>/addToCart"><input type="button" value="Agregar al carrito"></a> 
             <% } %>
