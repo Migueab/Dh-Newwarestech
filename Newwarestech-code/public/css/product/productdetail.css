@@ -7,19 +7,26 @@
 .main1{
     width:50%;
     height: 100%;
-    padding:5px;
-    background-color: whitesmoke;
-    border: solid;
+    padding: 5px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    
 }
 .main2{
     display: flex;
     flex-direction: column;
-    justify-items: center;
+    align-items: center;
     justify-content: space-around;
+    text-align: center;
     width:50%;
     height: 100%;
     padding:5px;
-    background-color: whitesmoke;
+}
+
+.main2 p{
+    font-size: 20px;
 }
 
 
