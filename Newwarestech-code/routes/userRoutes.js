@@ -51,9 +51,21 @@ router.put('/:user/put',[ upload.single('imagen'), authMiddleware ], userControl
 //@post /users/:id/deleteUser  funcion de  update
 router.delete('/updateuser/:user/delete', authMiddleware ,userController.deleteUser); 
 
+
+//@get /api/users
+
+router.get ( '/api/users' , userController.getApiUsers);
+
+//@get /api/users/:id
+
+router.get ( '/api/users/:id' , userController.getApiUsersDetail);
+
+
 //@get /logout
 router.get ( '/logout' , userController.getLogout );
 
+//@get /api
 
+// router.get ("/" , userController.getApi);
 
 module.exports = router;

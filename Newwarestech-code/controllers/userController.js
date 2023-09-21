@@ -6,6 +6,7 @@ const bcryptjs = require('bcryptjs');
 const session = require('express-session');
 
 const db = require("../database/models");
+const Op = db.Sequelize.Op;
 
 const userController = {
 
@@ -312,6 +313,56 @@ const userController = {
         res.clearCookie();
 
         res.redirect('/');
+
+    },
+
+    getApiUsers :(req , res)=>{
+
+        db.Usuario.findAll()
+        .then(usuarios =>{
+
+            let detailUser = "http://localhost:3005/users/api/users/"
+
+            let detail = "detail"
+
+            usuarios.map(elemento=> elemento.dataValues.detail = detailUser )
+
+            usuarios.filter ( elemento => elemento.dataValues)
+
+            /* console.log(usuarios) */
+
+            return res.status(200).json({
+
+                count : usuarios.length,
+                data : usuarios,
+                url: "http://localhost:3005/users/api/users",
+    
+                status : 200
+            })
+        })
+
+
+    },
+
+    getApiUsersDetail :(req , res)=>{
+
+        db.Usuario.findByPk( req.params.id)
+        .then(usuario =>{
+
+            return res.status(200).json({
+               
+                data : usuario,
+                status : 200
+
+            })/* .then(usuario =>{
+
+                return res.render('apiUsers' ,{ 
+
+                    usuario: usuario
+                })
+            }) */
+        })
+
 
     },
 

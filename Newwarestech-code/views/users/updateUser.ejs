@@ -5,8 +5,8 @@
 <form action="/users/<%= users.id %>/put?_method=put" method="post" enctype="multipart/form-data">
     
     <div>
-        <label for="image">Imagen: </label>
-        <input type="file" name="image" id="image" value="<%= users.image %>"><br><br>
+        <label for="imagen">Imagen: </label>
+        <input type="file" name="imagen" id="imagen" value="<%= users.imagen %>"><br><br>
     </div>
 
     <div>
@@ -25,8 +25,8 @@
     </div>
     
     <div>
-        <label for="category">Categoria:  </label>
-        <input type="text" name="category" id="category" <%= users.category %> > <br><br>
+        <label for="usuariotipo">Categoria:  </label>
+        <input type="text" name="usuariotipo" id="usuariotipo" <%= users.usuariotipo %> > <br><br>
     </div>
     
     <div>
