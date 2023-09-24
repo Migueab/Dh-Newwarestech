@@ -9,6 +9,7 @@ const authMiddleware = require('../middlewares/authMiddleware');
 const guestMiddleware = require('../middlewares/guestMiddleware');
 
 const userAdminLoggedNavMiddleware = require('../middlewares/userAdminLoggedNavMiddleware');
+const adminMiddleware = require('../middlewares/adminMiddleware');
 
 //@get /
 router.get('/', mainControllers.getIndex);
@@ -22,27 +23,27 @@ router.post('/admin', validationsUserLogin.validateLogInUser ,mainControllers.po
 
 
 //@get /adminregister
-router.get('/adminregister', authMiddleware ,mainControllers.getAdminRegister);
+router.get('/adminregister', adminMiddleware ,mainControllers.getAdminRegister);
 
 //@post /adminregister
-router.post('/adminregister', authMiddleware ,validationsUser.validateCreateUser ,mainControllers.postAdminRegister);
+router.post('/adminregister', adminMiddleware ,validationsUser.validateCreateUser ,mainControllers.postAdminRegister);
 
 
 
 //@get /adminuserprofile       
-router.get('/adminuserprofile/:userAdmin', authMiddleware ,mainControllers.getAdminUserProfile);
+router.get('/adminuserprofile/:userAdmin', adminMiddleware,mainControllers.getAdminUserProfile);
 
 
 //@get /update/admin        
-router.get('/updateadminuser/:userAdmin', authMiddleware ,mainControllers.getUserAdminToUpdate);
+router.get('/updateadminuser/:userAdmin',  adminMiddleware ,mainControllers.getUserAdminToUpdate);
 
 //@put /update/admin
-router.put('/updateadminuser/:userAdmin/update', authMiddleware , mainControllers.putUserAdminUpdate);
+router.put('/updateadminuser/:userAdmin/update',  adminMiddleware , mainControllers.putUserAdminUpdate);
 
 
 //@delete
 
-router.delete ('/updateadminuser/:userAdmin/delete' , authMiddleware,  mainControllers.deleteUserAdmin)
+router.delete ('/updateadminuser/:userAdmin/delete' , adminMiddleware,  mainControllers.deleteUserAdmin)
 
 
 //@logout

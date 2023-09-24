@@ -71,8 +71,6 @@ const userController = {
             return console.log(e)
         });
 
-
-
         let newUser = {
 
             ...req.body,
@@ -80,9 +78,8 @@ const userController = {
             usuariotipo: "cliente",
         }
 
-        newUser.imagen ? '/images/' + req.file.filename :'/images/users/user.png';
-
-
+        newUser.imagen = req.file ? '/images/users/' + req.file.filename : '/images/users/user.png';
+    
         db.Usuario.create({
             ...newUser
         })
@@ -107,7 +104,7 @@ const userController = {
             })
         }
 
-        return res.redirect('/');
+        return res.redirect('/users/login');
 
     },
 
@@ -223,25 +220,25 @@ const userController = {
     getUserProfile: (req, res) => {
 
         const userDataSession = req.session.userLogged;
-
-        console.log(userDataSession)
+        const userDataInCookie = req.cookies.emailUser;
 
         db.Usuario.findOne({
+
             where:{
-                email: userDataSession.email
+                email: userDataSession.email || userDataInCookie
             }
+
         }).then(function(usuario){
 
-            const user = usuario;
-
             return res.render('userProfile', {
-            user: user,
+
+            user: usuario,
 
         });
 
         }).catch(function(e){
 
-            return console.log("No se encontro la informacion del usuario")
+            return console.log(e)
         })
         
     },
@@ -249,8 +246,6 @@ const userController = {
     getuserToUpdate: (req, res) => {
 
         const id = Number(req.params.user);
-
-        console.log(id)
 
         /* const users = userModel.findByid(id) */
 
@@ -277,13 +272,17 @@ const userController = {
 
         newData = req.body;
 
+        newData.imagen = req.file? '/images/users/' + Date.now() + "-" + req.file.filename : '/images/users/user.png';
+
         db.Usuario.update({
 
             nombre: req.body.nombre,
             apellido:req.body.apellido,
             telefono: req.body.telefono,
             direccion: req.body.direccion,
-            imagen: req.body.imagen
+
+            imagen: newData.imagen
+
         },{
             where:{
                 id:id
@@ -300,7 +299,6 @@ const userController = {
 
         const id = Number(req.params.user);
 
-        /* userModel.deleteByid(id); */
 
         db.Usuario.destroy({
             where:{
@@ -309,7 +307,8 @@ const userController = {
         });
 
         delete req.session.userLogged;
-        res.clearCookie('emailUser');
+        res.clearCookie('emailUser');        
+        res.clearCookie('emailAdmin');
         res.clearCookie();
 
         res.redirect('/');
@@ -325,17 +324,28 @@ const userController = {
 
             let detail = "detail"
 
-            usuarios.map(elemento=> elemento.dataValues.detail = detailUser )
+            usuarios.map(elemento=> elemento.dataValues.detail = detailUser );
+            
+            usuarios.forEach(elemento=>elemento.dataValues.detail += elemento.dataValues.id);
 
-            usuarios.filter ( elemento => elemento.dataValues)
+            usuarios.filter((elemento)=> { 
+                
+                elemento.dataValues ={
 
-            /* console.log(usuarios) */
-
+                    id : elemento.dataValues.id,
+                    nombre : elemento.dataValues.nombre,
+                    apellido : elemento.dataValues.apellido,
+                    email : elemento.dataValues.email,
+                    detail: elemento.dataValues.detail
+                }
+            
+            });
+            
             return res.status(200).json({
 
                 count : usuarios.length,
                 data : usuarios,
-                url: "http://localhost:3005/users/api/users",
+                url: "http://localhost:3005/users/api/users/",
     
                 status : 200
             })
@@ -349,18 +359,26 @@ const userController = {
         db.Usuario.findByPk( req.params.id)
         .then(usuario =>{
 
+           let usuarioDB = {
+
+                id:usuario.id,
+                nombre: usuario.nombre,
+                apellido: usuario.apellido,
+                email: usuario.email,
+                telefono: usuario.telefono,
+                direccion: usuario.direccion,
+                imagen : usuario.imagen
+           }
+
+           let imagenUsuario = usuario.imagen
+
             return res.status(200).json({
-               
-                data : usuario,
+
+                data : usuarioDB,
+                imagen: "" + imagenUsuario,
                 status : 200
 
-            })/* .then(usuario =>{
-
-                return res.render('apiUsers' ,{ 
-
-                    usuario: usuario
-                })
-            }) */
+            })
         })
 
 

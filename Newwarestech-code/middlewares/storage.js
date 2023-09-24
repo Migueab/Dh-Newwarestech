@@ -7,8 +7,9 @@ const storage = multer.diskStorage({
         cb(null, './public/images/users')
     },
     filename: (req,file, cb)=>{
-        cb(null, 'user-' + Date.now() + '-' + file.originalname);
+        cb(null, Date.now() + '-' + file.originalname);
     } 
 });
+
 
 module.exports = storage;

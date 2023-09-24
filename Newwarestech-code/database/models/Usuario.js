@@ -23,17 +23,23 @@ module.exports= function(sequelize,dataTypes){
             unique: true
         },
         password:{
-            type:dataTypes.STRING
+            type:dataTypes.STRING,
+            allowNull : false
         },
         telefono:{
-            type:dataTypes.INTEGER
+            type:dataTypes.STRING,
+            allowNull :true
         },
         direccion:{
             type:dataTypes.STRING
         },
         usuariotipo:{
             type:dataTypes.STRING
+        },
+        imagen:{
+            type:dataTypes.STRING
         }
+
     
     }
 

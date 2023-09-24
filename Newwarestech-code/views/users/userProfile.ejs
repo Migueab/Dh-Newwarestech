@@ -19,21 +19,31 @@
       
             <article class="article">
                 
-                <label>Foto</label>
-                <img src="<%= user.imagen %>" alt="img">
-                
-                <label for="name">Nombre</label>
-                <input type="text" name="nombre" value="<%= user.nombre %>" readonly> 
-                
-                <label for="apellido">Apellido</label>
-                <input type="text" name="apellido" value="<%= user.apellido %>" readonly> 
-                
-                <label for="email">Email</label>
-                <input type="text" name="email" value="<%= user.email %>" readonly> 
-                
-                <label for="categoria">Categoria</label>
-                <input type="text" name="categoria" value="<%= user.product_type %>" readonly> 
-                
+                <div>
+                    <label>Foto</label>
+                    <img src="<%= user.imagen %>" alt="img">
+                </div>
+                <br>
+                <div>
+                    <label for="name">Nombre</label>
+                    <input type="text" name="nombre" value="<%= user.nombre %>" readonly> 
+                </div>
+                <br>
+                <div>
+                    <label for="apellido">Apellido</label>
+                    <input type="text" name="apellido" value="<%= user.apellido %>" readonly> 
+                </div>
+                <br>
+                <div>
+                    <label for="email">Email</label>
+                    <input type="text" name="email" value="<%= user.email %>" readonly> 
+                </div>
+                <br>
+                <div>
+                    <label for="product_type">Categoria</label>
+                    <input type="text" name="product_type" value="<%= user.product_type %>" readonly> 
+                </div>
+                <br>
                 <div class="botones">
                     <a href="/users/<%= user.id %>/updateuser"><input type="button" value="Editar Usuario"></a> 
                 </div>

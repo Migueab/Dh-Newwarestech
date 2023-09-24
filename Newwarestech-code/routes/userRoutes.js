@@ -20,12 +20,12 @@ const upload = multer({storage});
 
 
 //@GET /users/login
-router.get('/login', /* guestMiddleware , */  userController.getLogin);
+router.get('/login', guestMiddleware ,  userController.getLogin);
 
 router.post('/login' , validationsUserLogin.validateLogInUser , userController.postLogin);
 
 //@GET /users/register
-router.get('/register', /* guestMiddleware , */ userController.getRegister);
+router.get('/register', guestMiddleware , userController.getRegister);
 
 //@Post /users/usersList
 router.post ('/register',[ upload.single('image'), validationsUser.validateCreateUser ], userController.postRegister );
@@ -45,7 +45,7 @@ router.get('/userprofile',userController.getUserProfile);
 router.get('/:user/updateuser', authMiddleware ,userController.getuserToUpdate); 
 
 //@put /users/:id/put  formulario para update
-router.put('/:user/put',[ upload.single('imagen'), authMiddleware ], userController.userUpdate); 
+router.put('/:user/put', upload.single('imagen'), authMiddleware , userController.userUpdate); 
 
 
 //@post /users/:id/deleteUser  funcion de  update

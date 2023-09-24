@@ -18,16 +18,20 @@
         <label for="apellido">Apellido:  </label>
         <input type="text" name="apellido" id="apellido" value="<%= users.apellido %>" > <br><br>
     </div>
+    <div>
+        <label for="telefono">Telefono:  </label>
+        <input type="text" name="telefono" id="telefono" value="<%= users.telefono %>" > <br><br>
+    </div>
+    <div>
+        <label for="telefono">Direccion:  </label>
+        <input type="text" name="telefono" id="telefono" value="<%= users.direccion %>" > <br><br>
+    </div>
+
 
     <div>
-        <label for="email">Email:  </label>
-        <input type="text" name="email" id="email" value="<%= users.email %>" > <br><br>
+        <p>Emai:<%= users.email %></p>
     </div>
-    
-    <div>
-        <label for="usuariotipo">Categoria:  </label>
-        <input type="text" name="usuariotipo" id="usuariotipo" <%= users.usuariotipo %> > <br><br>
-    </div>
+    <br>
     
     <div>
         <input type="submit" value="Guardar cambios">

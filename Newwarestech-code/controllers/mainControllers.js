@@ -243,7 +243,8 @@ const controllers = {
             /*    confirmpassword: bcryptjs.hashSync(req.body.confirmpassword, 10) */
         }
 
-        /* userAdminModel.createOne(newUser); */
+        newUser.imagen = req.file ? '/images/users/' + req.file.filename : '/images/users/user.png';
+    
 
         db.Usuario.create({
             ...newUser
@@ -277,11 +278,9 @@ const controllers = {
             }
         }).then(function (usuario) {
 
-            const userAdmin = usuario
-
             return res.render('adminUserProfile', {
 
-                userAdmin: userAdmin
+                userAdmin: usuario
             });
 
         })
@@ -298,10 +297,10 @@ const controllers = {
             }
         }).then(function (usuario) {
 
-            const userAdmin = usuario;
-
             return res.render('updateAdminUsers', {
-                userAdmin: userAdmin
+
+                userAdmin: usuario
+
             });
         })
 
@@ -311,9 +310,15 @@ const controllers = {
 
     putUserAdminUpdate: (req, res) => {
 
+
+        let nuevaImagen = "/images/users/" + Date.now() + req.body.imagen
+
         db.Usuario.update({
 
-            ...req.body
+            nombre: req.body.nombre,
+            apellido: req.body.apellido,
+            imagen : nuevaImagen
+            
         }, {
             where: {
                 email: req.session.userAdminLogged.email

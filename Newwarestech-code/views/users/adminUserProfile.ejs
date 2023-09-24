@@ -19,9 +19,15 @@
 <body>
     <%- include('../partials/header'); %>
 
-    <img src="<%= userAdmin.imagen %>" alt="">
-    <p>Nombre :<%= userAdmin.nombre %></p>
-    <p>Apellido :<%= userAdmin.apellido %></p>
+    <div>
+      <img src="<%= userAdmin.imagen %>" alt="img">
+    </div>
+    <div>
+      <p>Nombre :<%= userAdmin.nombre %></p>
+    </div>
+    <div>
+      <p>Apellido :<%= userAdmin.apellido %></p>
+    </div>
     
     <%- include('../partials/footer'); %>
 </body>
