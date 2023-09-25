@@ -11,11 +11,12 @@ function userLoggedNavMiddleware(req,res,next){
 
     let emailInCookie = req.cookies.emailUser;
 
+    if(emailInCookie){
+
     db.Usuario.findOne({
         where:{
 
-            usuariotipo : "cliente",
-            email: emailInCookie
+            email: req.cookies.emailUser
 
         }}).then(function(usuario){
 
@@ -31,7 +32,7 @@ function userLoggedNavMiddleware(req,res,next){
             return console.log(e);
 
         });
-    
+    }
 
 /* Verificando */
 

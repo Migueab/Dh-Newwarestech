@@ -20,7 +20,7 @@
 <body>
     <%- include('../partials/header') %>
     <br>
-    <form action="/updateadminuser/<%= userAdmin.id %>/update?_method=put" method="post">
+    <form action="/updateadminuser/<%= userAdmin.id %>/update?_method=put" method="post" enctype="multipart/form-data">
         
         <div>
             <h2>Usuario: <%= userAdmin.nombre %></h2>

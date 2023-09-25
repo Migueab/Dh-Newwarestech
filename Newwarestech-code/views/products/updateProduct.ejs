@@ -7,10 +7,13 @@
     <div>
 
         <% if(errors.length >0){ %>
+
+            <h3 style="color: red;">Por favor revise el formulario a llenar</h3>
+            <br>
     <ul>
         <% errors.forEach( elemento =>{ %>
 
-            <li>
+            <li style="color: red;">
                 <%= elemento.msg %>
             </li>
 
@@ -33,7 +36,7 @@
                     <label><input type="radio" name="product_type" value="accesories"<%= products.product_type === "accesories" ? "checked" :""%>>accesories</label>
                     <label><input type="radio" name="product_type" value="printer" <%= products.product_type === "printer" ? "checked" :""%>>printer</label>
                 </fieldset><br>
-                <fieldset>
+                <article>
                     
                     <legend>Ingresa la Infomación</legend>
                     <label for="name">Nombre: </label>
@@ -41,7 +44,7 @@
                     
                     <div>
                         <label for="imagen">Imagen</label>
-                        <input type="file" name="imagen" id="imagen" value="<%= products.imagen %>"><br>
+                        <input type="file" name="imagen" id="imagen" accept="jpeg,png"><br>
                     </div>
                     <div>
                         <label for="price">Precio: </label>
@@ -55,6 +58,6 @@
                         <label for="description">Descripción: </label>
                         <input type="text" name="description" id="description" value="<%= products.descripcion %>"><br>
                     </div>
-                </fieldset><br>
+                </article><br>
                 <input type="submit" value="Guardar cambios">
             </form>

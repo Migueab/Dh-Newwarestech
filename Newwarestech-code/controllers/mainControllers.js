@@ -43,14 +43,12 @@ const controllers = {
     //Login de administrador
     postAdmin: (req, res) => {
 
-        let emailadministrador = req.body.email;
-
         // Primer findall es para la validacion
         db.Usuario.findAll({
 
             where: {
                 usuariotipo: "administrador",
-                email : emailadministrador
+                email : req.body.email
             }
         })
             .then(function (usuario) {
@@ -81,7 +79,7 @@ const controllers = {
 
             where: {
                 usuariotipo: "administrador",
-                email: emailadministrador
+                email: req.body.email
             }
 
         }).then(function (usuario) {
@@ -111,7 +109,7 @@ const controllers = {
 
             where: {
                 usuariotipo: "administrador",
-                email: emailadministrador
+                email: req.body.email
             }
 
         }).then(function (usuario) {
@@ -141,8 +139,7 @@ const controllers = {
     db.Usuario.findOne({
 
         where: {
-            usuariotipo: "administrador",
-            email: emailadministrador
+            email: req.body.email
         }
 
     }).then(function (usuario) {
@@ -187,13 +184,12 @@ const controllers = {
         const validation = expressValidator.validationResult(req);
 
         if (validation.errors.length > 0) {
-
+            
             res.render('adminRegister', {
 
                 errors: validation.errors,
                 values: req.body
             });
-
         }
 
         const passwordEquality = req.body.password === req.body.confirmpassword;
@@ -209,9 +205,6 @@ const controllers = {
             })
         }
 
-        // El console log es leido correctamente
-
-        // console.log(req.body.email)
 
         db.Usuario.findOne({
 
@@ -233,6 +226,9 @@ const controllers = {
                     values: req.body
                 })
             }
+        }).catch( function(e){
+
+            return console.log(e)
         })
 
         const newUser = {
@@ -246,9 +242,13 @@ const controllers = {
         newUser.imagen = req.file ? '/images/users/' + req.file.filename : '/images/users/user.png';
     
 
-        db.Usuario.create({
-            ...newUser
-        })
+        if(validation.errors.length <= 0){
+
+            db.Usuario.create({
+                ...newUser
+            })
+        }
+
 
         /* 
                 if (newUser) {
@@ -310,14 +310,11 @@ const controllers = {
 
     putUserAdminUpdate: (req, res) => {
 
-
-        let nuevaImagen = "/images/users/" + Date.now() + req.body.imagen
-
         db.Usuario.update({
 
             nombre: req.body.nombre,
             apellido: req.body.apellido,
-            imagen : nuevaImagen
+            imagen :  req.file ? "/images/users/" + req.file.filename : '/images/users/user.png'
             
         }, {
             where: {

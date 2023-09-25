@@ -7,11 +7,12 @@ function userAdminLoggedNavMiddleware(req,res,next){
 
     let emailInCookie = req.cookies.emailAdmin;
 
+    if(emailInCookie){
+
     db.Usuario.findOne({
 
         where:{
-            usuariotipo : "administrador",
-            email: emailInCookie
+            email: req.cookies.emailAdmin
         }
     }).then(function(usuario){
 
@@ -27,7 +28,7 @@ function userAdminLoggedNavMiddleware(req,res,next){
 
         return console.log(e)
     })
-    
+}
 
     /* Verificando */
 

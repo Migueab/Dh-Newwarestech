@@ -5,7 +5,7 @@
 
             <div style ="color: red;" style="font-size: small;">
                 
-                <% if (errors.length > 0) { %>
+                <% if (errors.length >= 1) { %>
                     <h2>Por favor verifique el formulario a llenar:</h2>
                     <ul>
                         <% errors.forEach(elemento=>{%>
@@ -20,11 +20,10 @@
             </div>
 
         <form action="/products/createProduct" method="post" enctype="multipart/form-data" >
-            <fieldset>
+  
+            <div>
                 <legend>Elige una Categoria</legend>
-                
-              
-            </fieldset><br>
+            </div>
                 <div>
                     <label for="product_type">Phones</label>
                     <input type="radio" name="product_type" id="product_type" value="phones" <%= values.product_type === "phones" ? "checked" :""%>>
@@ -41,31 +40,37 @@
                     <label for="product_type">Printer</label>
                     <input type="radio" name="product_type" id="product_type" value="printer" <%= values.product_type === "printer" ? "checked" :""%>>
                 </div>
-            </fieldset><br>
-            <fieldset>
+   
+  
                 <legend>Ingresa la Infomación</legend>
                 <div>
                     <label for="nombre">Nombre</label>
                     <input type="text" name="nombre" id="nombre" placeholder="nombre" value="<%= values.nombre %>">
                 </div>
+                <br>
                 <div>
-                    <label for="imagen">Imagen</label>
-                    <input type="file" name="imagen" id="imagen" value="<%= values.imagen %>">
+                    <label for="imagen"></label>
+                    <input type="file" name="imagen" id="imagen" accept="jpeg,png">
                 </div>
+               
+                <br>
                 <div>
                     <label for="precio">Precio</label>
                     <input type="number" name="precio" id="precio" placeholder="precio" value="<%= values.precio %>">
                 </div>
+                <br>
                 <div>
                     <label for="stock">Stock</label>
                     <input type="number" name="stock" id="stock" placeholder="stock" value="<%= values.precio %>">
                 </div>
+                <br>
                 <div>
                     <label for="descripcion">Descripción</label>
                     <input type="text" name="descripcion" id="descripcion" placeholder="descripcion" value="<%= values.descripcion%>">
                 </div>
-            </fieldset>
+       
             <div>
-                <input type="submit" value="Agregar nuevo">
+                <input type="submit" value="Agregar nuevo producto">
             </div>
+
         </form>

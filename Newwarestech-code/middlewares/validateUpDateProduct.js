@@ -19,11 +19,11 @@ const Updatevalidations={
         
         expressValidator.body('descripcion')
         .notEmpty()
-        .withMessage('Escriba la descripción del producto'),
+        .withMessage('Escriba la descripción del producto')
 
-        expressValidator.body('imagen')
+        /* expressValidator.body('imagen')
         .notEmpty()
-        .withMessage('Agregue la imagen del producto')
+        .withMessage('Agregue la imagen del producto') */
 
     ]
 }

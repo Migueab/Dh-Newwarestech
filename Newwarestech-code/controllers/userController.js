@@ -375,7 +375,6 @@ const userController = {
             return res.status(200).json({
 
                 data : usuarioDB,
-                imagen: "" + imagenUsuario,
                 status : 200
 
             })

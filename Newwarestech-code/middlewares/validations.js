@@ -21,9 +21,9 @@ const validations={
         .withMessage('Escriba la descripción del producto')
         .isLength({min:20,max:100}).withMessage('La descripcion debe contener mas de 20 caracteres'),
 
-        expressValidator.body('imagen')
+        /* expressValidator.body("imagen")
         .notEmpty()
-        .withMessage('Agregue la imagen del producto')
+        .withMessage('Agregue la imagen del producto') */
 
     ]
 }

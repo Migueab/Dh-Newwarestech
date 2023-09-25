@@ -27,14 +27,9 @@ const productController = {
                 });
 
             })
-
-        /* const products = productModel.findByProduct_type('phones', false) */
-
     },
 
     getPrinters: (req, res) => {
-
-        /* const products = productModel.findByProduct_type('printer', false); */
 
         db.Producto.findAll({
             where: {
@@ -51,8 +46,6 @@ const productController = {
     },
 
     getAccesorios: (req, res) => {
-
-        /* const products = productModel.findByProduct_type('accesories', false); */
 
         db.Producto.findAll({
             where: {
@@ -71,8 +64,6 @@ const productController = {
     },
 
     getInformatica: (req, res) => {
-
-        /* const products = productModel.findByProduct_type('software', false); */
 
         db.Producto.findAll({
             where: {
@@ -103,29 +94,16 @@ const productController = {
         db.Producto.findByPk(id)
             .then(function (producto) {
 
-                const product = producto;
-
                 return res.render('productDetail', {
-                    product: product
+                    product: producto
                 });
-            })
+            }).catch(function(e){
 
-        /* const product = productModel.findByid(id) */
+                return console.log(e)
+            })
 
     },
 
-    /* postDetail: (req,res)=>{
-
-        let detalleProducto = [];
-
-        const datos = req.body;
-                
-        detalleProducto.push(datos);
-        
-        res.json(detalleProducto);
-
-       // res.render('productDetail')
-    }, */
 
     createProduct: (req, res) => {
 
@@ -138,6 +116,12 @@ const productController = {
 
     addProduct: (req, res) => {
 
+        const newProduct = req.body;
+
+        /* let imagenDelProducto = '/images/'+req.file.filename
+
+        req.file? imagenDelProducto : ""; */
+        
         const validations = expressValidator.validationResult(req);
 
         if (validations.errors.length > 0) {
@@ -150,17 +134,47 @@ const productController = {
 
         }
 
-        const newProduct = req.body;
+        if(validations.errors.length <= 0){
 
-        newProduct.imagen = '/images/' + req.file.filename
+            db.Producto.create({
+    
+                ...newProduct,
 
-        db.Producto.create({
+                imagen: req.file.filename
+    
+            });
+        }else{
 
-            ...newProduct,
+            return res.render("createProduct" ,{
 
-        });
+                errors: validations.errors,
+                values: req.body
+            })
+        }
+        
 
-        /* res.redirect('/') */
+        if (newProduct.product_type === "phones") {
+ 
+            return res.redirect('/products/productsPhones')
+
+        }else if(newProduct.product_type === "printer"){
+
+            return res.redirect('/products/productsPrinters')
+        
+        }else if(newProduct.product_type === "printer"){
+
+            return res.redirect('/products/productsInformatica')
+
+        }else if(newProduct.product_type === "accesories"){
+
+            return res.redirect('/products/productsAccesorios');
+        }else{
+
+            return res.redirect("/")
+        }
+
+
+       /*  res.redirect('/') */
 
 /* 
         let newproductid = db.Producto.findAll({
@@ -180,7 +194,7 @@ const productController = {
 
         return res.redirect('/products/'+newproductid+'/productDetail'); */
 
-        switch (newProduct.product_type) {
+        /* switch (newProduct.product_type) {
  
             case "phones":
                 return res.redirect('/productsPhones');
@@ -197,7 +211,7 @@ const productController = {
         
             default: 
                 break;
-        }
+        } */
 
 
     },
@@ -206,16 +220,12 @@ const productController = {
 
         const id = Number(req.params.id);
 
-        /* const products = productModel.findByid(id) */
-
         db.Producto.findByPk(id)
             .then(function (producto) {
 
-                const products = producto;
-
                 return res.render('updateProduct', {
 
-                    products: products,
+                    products: producto,
                     errors: [],
                     values: []
                 })
@@ -229,74 +239,49 @@ const productController = {
 
         const validations = expressValidator.validationResult(req);
 
-        if (validations.errors.length > 0) {
+        db.Producto.findOne({
 
-            res.render('updateProduct', {
+            where:{
+                id:id
+            }
 
-                errors: validations.errors,
-                values: req.body
-                
-            });
-        }
+        }).then(function(producto){
+    
+            if (validations.errors.length > 0) {
+    
+                return res.render('updateProduct', {
+    
+                    errors: validations.errors,
+                    values: req.body,
+                    products: producto
+                });
+            }
 
-        if (!newData.imagen) {
+        }).catch(function(e){
 
-            db.Producto.findOne({
+            return console.log(e)
+        })
 
+        if(validations.errors.length <= 0){
+
+            db.Producto.update({
+    
+                product_type:req.body.product_type,
+                nombre:req.body.nombre,
+                precio:req.body.precio,
+                stock:req.body.stock,
+                descripcion:req.body.descripcion,
+
+                imagen: req.file.filename
+    
+            }, {
                 where: {
                     id: id
                 }
-
-            }).then(function (producto) {
-
-                return producto.imagen
-
-            }).catch(function (e) {
-                return console.log(e)
-            })
+            });
+            
         }
-        // Esto es asi porque, si no cambia la imagen, que sea la que habia antes
-    
 
-        db.Producto.update({
-
-            product_type:req.body.product_type,
-            nombre:req.body.nombre,
-            imagen:req.body.imagen,
-            precio:req.body.precio,
-            stock:req.body.stock,
-            descripcion:req.body.descripcion
-
-        }, {
-            where: {
-                id: id
-            }
-        });
-
-        /*  newData.image = req.file? '/images/' + req.file.filename : req.body.img */
-
-        /* const product_type = newData.product_type; */
-
-        /* productModel.updateByid(id, newData); */
-
-        /*  switch (product_type) {
- 
-             case 'phones':
-                 return productController.getPhones(req, res);
-             break;
-             case 'printer':
-                 return productController.getPrinters(req, res);
-             break;
-             case 'accesories':
-                 return productController.getAccesorios(req, res);
-             break;
-             case 'software':
-                 return productController.getInformatica(req, res);
-             break;
-         
-             default:
-                 break;
-         } */
 
         return res.redirect('/products/'+id+'/productDetail');
     },

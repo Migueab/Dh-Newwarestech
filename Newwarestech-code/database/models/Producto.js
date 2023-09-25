@@ -15,20 +15,33 @@ module.exports= function(sequelize,dataTypes){
             type:dataTypes.STRING
         },
         precio:{
-            type:dataTypes.INTEGER
+            type:dataTypes.DECIMAL
         },
         imagen:{
             type:dataTypes.STRING,
-            allowNull: true
+            allowNull: false
         },
         descripcion:{
             type:dataTypes.STRING
         },
         stock:{
-            type:dataTypes.INTEGER
+            type:dataTypes.INTEGER,
+            allowNull : true
         },
         product_type : {
             type: dataTypes.STRING
+        },
+        createdAt:{
+            type:dataTypes.DATE,
+            allowNull:true
+        },
+        updatedAt:{
+            type:dataTypes.DATE,
+            allowNull:true
+        },
+        deletedAt:{
+            type:dataTypes.DATE,
+            allowNull:true
         }
         // Pregunta, es que en las tablas intermedias hay que incluir foreign Key?
         // usuario_id ??

@@ -11,6 +11,12 @@ const guestMiddleware = require('../middlewares/guestMiddleware');
 const userAdminLoggedNavMiddleware = require('../middlewares/userAdminLoggedNavMiddleware');
 const adminMiddleware = require('../middlewares/adminMiddleware');
 
+const multer = require("multer")
+
+const storage = require("../middlewares/storage");
+
+const upload = multer({storage : storage}); 
+
 //@get /
 router.get('/', mainControllers.getIndex);
 
@@ -26,7 +32,7 @@ router.post('/admin', validationsUserLogin.validateLogInUser ,mainControllers.po
 router.get('/adminregister', adminMiddleware ,mainControllers.getAdminRegister);
 
 //@post /adminregister
-router.post('/adminregister', adminMiddleware ,validationsUser.validateCreateUser ,mainControllers.postAdminRegister);
+router.post('/adminregister',[ upload.single('imagen'), adminMiddleware , validationsUser.validateCreateUser ] ,mainControllers.postAdminRegister);
 
 
 
@@ -38,7 +44,7 @@ router.get('/adminuserprofile/:userAdmin', adminMiddleware,mainControllers.getAd
 router.get('/updateadminuser/:userAdmin',  adminMiddleware ,mainControllers.getUserAdminToUpdate);
 
 //@put /update/admin
-router.put('/updateadminuser/:userAdmin/update',  adminMiddleware , mainControllers.putUserAdminUpdate);
+router.put('/updateadminuser/:userAdmin/update', [ adminMiddleware , upload.single('imagen') ], mainControllers.putUserAdminUpdate);
 
 
 //@delete

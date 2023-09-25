@@ -19,20 +19,22 @@ const adminMiddleware = require('../middlewares/adminMiddleware');
 //Configuración multer inicio
 
 const storage = multer.diskStorage({
-    destination:(req, file, cb)=>{
+
+    destination: (req, file, cb)=>{
         cb(null, './public/images')
     },
     filename: (req,file, cb)=>{
+
         cb(null, Date.now() + '-' + file.originalname);
     } 
 });
 
 const upload = multer({storage : storage}); 
 
-//Configuración multer final
+const validateImage = require("../middlewares/validateImageProduct");
 
+const validateUpdateImage = require("../middlewares/validateUpdateProductImage");
 
-//Requerir productos inicio
 
 //@GET /products/productsPhones                
 router.get('/productsPhones', productController.getPhones);            
@@ -64,7 +66,7 @@ router.post('/:id/productCart', productController.addCart);
 router.get('/createProduct', productController.createProduct); 
 
 //@POST /products/createProduct
-router.post('/createProduct', validateAddProduct.validateCreateProduct, upload.single('imagen'), adminMiddleware, productController.addProduct); 
+router.post('/createProduct',[ upload.single('imagen'), validateImage ,adminMiddleware ,validateAddProduct.validateCreateProduct ], productController.addProduct); 
 
 
 //@GET /products/:id/productDetail
@@ -73,11 +75,12 @@ router.get('/:id/productDetail', productController.getDetail);
 //@DELETE /products/:id/delete
 router.get('/:id/delete',  adminMiddleware ,  productController.deleteProduct); 
 
+
 //@GET /products/:id/update
 router.get('/:id/update',  adminMiddleware ,  productController.getUpdate); 
 
 //@put /products/:id/put  este es el update
-router.put('/:id/update', updateValidateProduct.validateUpdateProduct, upload.single('imagen'), adminMiddleware , productController.updateProduct ); 
+router.put('/:id/update',[ upload.single('imagen'), validateUpdateImage, adminMiddleware  ,updateValidateProduct.validateUpdateProduct ], productController.updateProduct ); 
 
 
 

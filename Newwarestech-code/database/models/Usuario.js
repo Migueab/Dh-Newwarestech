@@ -12,10 +12,12 @@ module.exports= function(sequelize,dataTypes){
             autoIncrement : true
         },
         nombre:{
-            type:dataTypes.STRING
+            type:dataTypes.STRING,
+            allowNull:false
         },
         apellido:{
-            type:dataTypes.STRING
+            type:dataTypes.STRING,
+            allowNull:false
         },
         email:{
             type:dataTypes.STRING,
@@ -38,7 +40,19 @@ module.exports= function(sequelize,dataTypes){
         },
         imagen:{
             type:dataTypes.STRING
-        }
+        },
+        createdAt:{
+            type:dataTypes.DATE,
+            allowNull:true
+        },
+        updatedAt:{
+            type:dataTypes.DATE,
+            allowNull:true
+        },
+        deletedAt:{
+            type:dataTypes.DATE,
+            allowNull:true
+        },
 
     
     }
