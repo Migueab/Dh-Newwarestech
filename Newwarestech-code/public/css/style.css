@@ -115,11 +115,11 @@ nav{
 /* Estilos footer*/
 footer{
     box-sizing: border-box;
-    padding: 5px;
-    height: 15%;
-    background-color: #1836B2;
+    padding: 8px;
+    height: 50%;
     display: flex;
     justify-content: space-between;
+
 }
 
 
@@ -127,12 +127,13 @@ footer{
 .footer-location{
     box-sizing: border-box;
     padding: 2px;
-    width: 20%;
+    width: 22%;
     display: flex;
+    justify-content: center;
 }
 
 .location-icon{
-    width: 40%;
+    width: 26%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -141,17 +142,7 @@ footer{
 .location-icon img{
     width: 100%;
 }
-.location-info{
-    width: 60%;
-    padding: 2px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
-.location-info p{
-    text-align: center;
-}
 
     /*Footer about-us*/
 .footer-about-us{
@@ -166,6 +157,7 @@ footer{
     justify-content: center;
     align-items: center;
     text-align: center;
+    padding: 1.5px;
 }
 .about-us1{
     height: 70%;
@@ -188,8 +180,8 @@ footer{
 
 .contact1, .contact2{
     display: flex;
-    justify-content: space-around;
     align-items: center;
+    justify-content: space-around;
 }
 
 .contact1{
@@ -197,7 +189,7 @@ footer{
 }
 
 .contact1 h3{
-    font-size: 30px;
+    font-size: 20px;
 }
 
 .contact2{
@@ -205,18 +197,13 @@ footer{
 }
 
 .contact2 a{
-    background-color: rgba(245, 245, 245, 65%);
-    font-size: 45px;
     border-radius: 20%;
-}
-
-.contact2 a i{
-    font-size: 50px;
 }
 
 /* Colores de marcar https://usbrandcolors.com/*/
 .fa-facebook{
     color:#4267B2;
+
 }
 .fa-instagram{
     color:#C13584;
@@ -231,7 +218,7 @@ footer{
     color: #25D366;
 }
 .fa-envelope{
-    color: #EEEEEE;
+    color: #5ca3e1;
 }
 
 
