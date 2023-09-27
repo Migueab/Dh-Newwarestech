@@ -140,7 +140,7 @@ const productController = {
 
                 ...newProduct,
 
-                imagen: req.file.filename
+                imagen: "/images/" +req.file.filename
 
             });
         } else {
@@ -236,16 +236,16 @@ const productController = {
     updateProduct: (req, res) => {
 
         const id = Number(req.params.id);
-
-        const validations = expressValidator.validationResult(req);
-
+        
         db.Producto.findOne({
-
+            
             where: {
                 id: id
             }
-
+            
         }).then(function (producto) {
+            
+            const validations = expressValidator.validationResult(req);
 
             if (validations.errors.length > 0) {
 
@@ -262,8 +262,6 @@ const productController = {
             return console.log(e)
         })
 
-        if (validations.errors.length <= 0) {
-
             db.Producto.update({
 
                 product_type: req.body.product_type,
@@ -272,15 +270,13 @@ const productController = {
                 stock: req.body.stock,
                 descripcion: req.body.descripcion,
 
-                imagen: req.file.filename
+                imagen: "/images/"+ req.file.filename
 
             }, {
                 where: {
                     id: id
                 }
             });
-
-        }
 
 
         return res.redirect('/products/' + id + '/productDetail');

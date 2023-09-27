@@ -66,7 +66,7 @@ router.post('/:id/productCart', productController.addCart);
 router.get('/createProduct', productController.createProduct); 
 
 //@POST /products/createProduct
-router.post('/createProduct',[ upload.single('imagen'), validateImage ,adminMiddleware ,validateAddProduct.validateCreateProduct ], productController.addProduct); 
+router.post('/createProduct',[ adminMiddleware, upload.single('imagen'), validateImage ,validateAddProduct.validateCreateProduct ], productController.addProduct); 
 
 
 //@GET /products/:id/productDetail
@@ -80,7 +80,7 @@ router.get('/:id/delete',  adminMiddleware ,  productController.deleteProduct);
 router.get('/:id/update',  adminMiddleware ,  productController.getUpdate); 
 
 //@put /products/:id/put  este es el update
-router.put('/:id/update',[ upload.single('imagen'), validateUpdateImage, adminMiddleware  ,updateValidateProduct.validateUpdateProduct ], productController.updateProduct ); 
+router.put('/:id/update',[ adminMiddleware, upload.single('imagen'), validateUpdateImage , updateValidateProduct.validateUpdateProduct ], productController.updateProduct ); 
 
 
 // APIS PRODUCTS
