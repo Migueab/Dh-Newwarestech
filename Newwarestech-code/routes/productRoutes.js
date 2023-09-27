@@ -83,6 +83,17 @@ router.get('/:id/update',  adminMiddleware ,  productController.getUpdate);
 router.put('/:id/update',[ upload.single('imagen'), validateUpdateImage, adminMiddleware  ,updateValidateProduct.validateUpdateProduct ], productController.updateProduct ); 
 
 
+// APIS PRODUCTS
+
+//@get /api/users
+
+router.get ( '/api/products' , productController.getApiProducts);
+
+//@get /api/users/:id
+
+router.get ( '/api/products/:id' , productController.getApiProductDetail);
+
+
 
 //CRUD final
 

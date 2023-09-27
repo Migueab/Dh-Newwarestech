@@ -370,7 +370,7 @@ const userController = {
                 imagen : usuario.imagen
            }
 
-           let imagenUsuario = usuario.imagen
+          /*  let imagenUsuario = usuario.imagen */
 
             return res.status(200).json({
 
