@@ -122,10 +122,6 @@ footer{
     justify-content: space-between;
 }
 
-.footer-contact, .footer-location, .footer-about-us{
-    background-color: #ffffff75;
-    border-radius: 5px;
-}
 
     /*footer-location*/
 .footer-location{
