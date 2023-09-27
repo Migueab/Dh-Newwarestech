@@ -2,20 +2,76 @@
 
 .main{
     height: 70%;
-    background-color: #86C7ED;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
+#completo-carrousel{
+ height: 250px;
+ width: 90%;
+ overflow: hidden;
+}
+
 .carrousel{
-    width: 60%;
-    height: 65%;
-    background-color: rgb(216, 212, 213);
+    height: 260px;
+    position: relative;
+
+    /* width: 60%;
     display: flex;
     flex-wrap: nowrap;
-    overflow: scroll;
+    */
+}
+
+.imgcarr1{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
+.imgcarr2{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+.imgcarr3{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+a{
+    text-decoration: none;
+}
+
+#puntoscarrousel{
+    display: flex;
+    justify-content: space-around;
+}
+
+#puntoscarrousel a{
+    font-size: 45px;
+}
+
+.imgcar{
+    height: 100%;
+    width: 100%;
+    border-image: auto;
+}
+
+.flechas{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.fa-chevron-left, .fa-chevron-right{
+    font-size: 18px;
 }
 .elemento{
     flex: 1 0 auto;
@@ -33,6 +89,8 @@
     width: auto;
     height: 80%;
 }
+
+
 .contenedor-promociones{
     width: 50%;
     height: 30%;
