@@ -1,5 +1,5 @@
 import axios from 'axios';
-const url_base = 'http://localhost:3000/api';
+const url_base = 'http://localhost:3005/api';
 
 
 export const getAllProducts = async () => {
