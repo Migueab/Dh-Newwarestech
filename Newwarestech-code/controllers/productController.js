@@ -140,7 +140,7 @@ const productController = {
 
                 ...newProduct,
 
-                imagen: "/images/" +req.file.filename
+                imagen: "/images/" + req.file.filename
 
             });
         } else {
@@ -236,15 +236,15 @@ const productController = {
     updateProduct: (req, res) => {
 
         const id = Number(req.params.id);
-        
+
         db.Producto.findOne({
-            
+
             where: {
                 id: id
             }
-            
+
         }).then(function (producto) {
-            
+
             const validations = expressValidator.validationResult(req);
 
             if (validations.errors.length > 0) {
@@ -262,21 +262,23 @@ const productController = {
             return console.log(e)
         })
 
-            db.Producto.update({
+        let imagenProducto = req.file ? "/images/" + req.file.filename : ""
 
-                product_type: req.body.product_type,
-                nombre: req.body.nombre,
-                precio: req.body.precio,
-                stock: req.body.stock,
-                descripcion: req.body.descripcion,
+        db.Producto.update({
 
-                imagen: "/images/"+ req.file.filename
+            product_type: req.body.product_type,
+            nombre: req.body.nombre,
+            precio: req.body.precio,
+            stock: req.body.stock,
+            descripcion: req.body.descripcion,
 
-            }, {
-                where: {
-                    id: id
-                }
-            });
+            imagen: imagenProducto
+
+        }, {
+            where: {
+                id: id
+            }
+        });
 
 
         return res.redirect('/products/' + id + '/productDetail');
@@ -285,8 +287,6 @@ const productController = {
     deleteProduct: (req, res) => {
 
         const id = Number(req.params.id);
-
-        /* let products = productModel.deleteByid(id) */
 
         db.Producto.destroy({
 
@@ -300,6 +300,97 @@ const productController = {
         // Deberia ser un resredirect prductList
     },
 
+    getCart: (req, res) => {
+
+        if (req.session.userLogged) {
+
+            let emailSession = req.session.userLogged
+
+            db.Usuario.findOne({
+
+                where: {
+                    email: emailSession.email
+                }
+            })
+            
+            .then(function (usuario) {
+
+                    return db.Carrito.findAll({
+                        where: {
+                            id: usuario.id
+                        }
+                    })
+                    
+                    .then(function (carrito) {
+
+                        return db.Producto.findAll({
+                            where: {
+                                id: 1
+                            }
+                        })
+                        .then(function (productos) {
+
+                            return res.render("productcart", {
+                                cartProducts: [productos]
+                            })
+                        })
+                    })
+                })
+
+        }
+
+        /* 
+        .then(function(productos){
+
+            return res.render("productcart", {
+                    cartProducts: productos
+                })
+        }).catch(function(e){
+
+            return console.log(e)
+        }) */
+
+
+
+        /*
+if (req.session.userAdminLogged === true) {
+
+    let emailSession = req.session.userAdminLogged
+
+    db.Usuario.findOne({
+
+        where: {
+            email: emailSession.email
+        }
+
+    }).then(function (usuario) {
+
+        let carritoEncontrado = db.Carrito.findAll({
+            where: {
+                usuarios_id: usuario.id
+            }
+        })
+    }).then(function (carrito) {
+
+            db.Producto.findAll({
+
+                where: {
+                    id: carrito.productos_id
+                }
+            })
+        }).then(function (productos) {
+
+                return res.render("productcart", {
+                    cartAdminProducts: productos,
+                })
+           
+
+    }).catch(function (e){
+        
+        return console.log(e)
+    }) */
+
+    },
     getaddToCart: (req, res) => {
 
         const id = Number(req.params.id);
@@ -321,7 +412,6 @@ const productController = {
 
         db.Producto.findByPk(id)
             .then(function (producto) {
-
 
                 return producto
             })
@@ -377,45 +467,6 @@ const productController = {
 
     },
 
-    getCart: (req, res) => {
-
-        let emailSession
-
-        // Hay que establecer la condicion de la session por uno u otro tipo de usuarios
-
-        db.Usuario.findOne({
-
-            where: {
-                email: emailSession
-            }
-
-        }).then(function (usuario) {
-
-            let carritoEncontrado = db.Carrito.findAll({
-                where: {
-                    usuarios_id: usuario.id
-                }
-            })
-            return carritoEncontrado
-
-        })
-            .then(function (carrito) {
-
-                const cartProduct = carrito;
-                const cartAdminProducts = carrito;
-
-                return res.render('productcart', {
-
-                    cartProducts: cartProduct,
-                    cartAdminProducts: cartAdminProducts
-                });
-
-            }).catch(function (e) {
-
-                return console.log(e)
-            });
-
-    },
 
     getApiProducts: (req, res) => {
 
@@ -514,27 +565,27 @@ const productController = {
 
     getApiProductDetail: (req, res) => {
 
-        db.Producto.findByPk( req.params.id)
-        .then( producto =>{
+        db.Producto.findByPk(req.params.id)
+            .then(producto => {
 
-           let productoDB = {
+                let productoDB = {
 
-                id: producto.id,
-                nombre: producto.nombre,
-                descripcion: producto.descripcion,
-                imagen : producto.imagen
-           }
+                    id: producto.id,
+                    nombre: producto.nombre,
+                    descripcion: producto.descripcion,
+                    imagen: producto.imagen
+                }
 
-          /*  let imagenUsuario = usuario.imagen */
+                /*  let imagenUsuario = usuario.imagen */
 
-            return res.status(200).json({
+                return res.status(200).json({
 
-                data : productoDB,
-                status : 200
+                    data: productoDB,
+                    status: 200
 
 
+                })
             })
-        })
 
 
 

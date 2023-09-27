@@ -80,7 +80,7 @@ router.get('/:id/delete',  adminMiddleware ,  productController.deleteProduct);
 router.get('/:id/update',  adminMiddleware ,  productController.getUpdate); 
 
 //@put /products/:id/put  este es el update
-router.put('/:id/update',[ adminMiddleware, upload.single('imagen'), validateUpdateImage , updateValidateProduct.validateUpdateProduct ], productController.updateProduct ); 
+router.put('/:id/update',[ adminMiddleware, upload.single('imagen') , updateValidateProduct.validateUpdateProduct, validateUpdateImage ], productController.updateProduct ); 
 
 
 // APIS PRODUCTS

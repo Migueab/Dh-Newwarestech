@@ -23,9 +23,9 @@
                 
                <% if (locals.IsLogged) { %>     
                 <% cartProducts.forEach(elemento=>{%>
-                    <p><%= elemento.name %></p>
-                    <img src=<%= elemento.image %> alt="img">
-                    <p><%= cartProducts.price %></p>
+                    <p><%= elemento.nombre %></p>
+                    <img src=<%= elemento.imagen %> alt="img">
+                    <p><%= cartProducts.precio %></p>
                     <button><a href="/products/<%= elemento.id %>/removeFromCart">Eliminar
                         producto</a></button>
 

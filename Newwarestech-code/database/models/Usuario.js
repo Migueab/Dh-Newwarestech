@@ -9,7 +9,8 @@ module.exports= function(sequelize,dataTypes){
         id :{
             type: dataTypes.INTEGER,
             primaryKey : true,
-            autoIncrement : true
+            autoIncrement : true,
+            unique:true
         },
         nombre:{
             type:dataTypes.STRING,
@@ -30,7 +31,8 @@ module.exports= function(sequelize,dataTypes){
         },
         telefono:{
             type:dataTypes.STRING,
-            allowNull :true
+            allowNull :true,
+            unique: true
         },
         direccion:{
             type:dataTypes.STRING

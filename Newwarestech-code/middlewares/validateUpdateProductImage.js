@@ -7,7 +7,7 @@ function validarEdicionImagen( req,res,next){
 
     const id = Number(req.params.id)
 
-    if (!imagen || imagen === "undefined"){
+    if (!imagen || imagen === "undefined" || ""){
 
         db.Producto.findOne({
             where:{
