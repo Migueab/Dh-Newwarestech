@@ -1,0 +1,58 @@
+.navbar-nav {
+    background-color:  #A066CB !important;
+}
+
+.sidebar-brand-icon img{
+    height: 62px;
+}
+
+
+div.h5 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.bg-gradient-secondary {
+
+    background-image: none !important;
+}
+
+a.btn-danger{
+    background-color: #c81fb8;
+    border: #c81fb8 1px solid;
+}
+
+a.btn-danger:hover{
+    background-color: #666;
+    border: #666 1px solid;
+}
+
+h1.h3 {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.productsInDB{
+    background-color: #164194;
+    border-radius: 10px;
+    color: white;
+    transition: 0.2s ease;
+}
+
+.productsInDB:hover{
+    background-color: #666;
+    border-radius: 10px;
+    color: white;
+}
+
+div.text-xs{
+    color: #164194 !important;
+}
+
+div.border-left-primary{
+    border-left: .25rem solid #164194 !important;
+}
+
+
+
+
