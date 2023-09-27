@@ -272,7 +272,7 @@ const userController = {
 
         newData = req.body;
 
-        newData.imagen = req.file? '/images/users/' + Date.now() + "-" + req.file.filename : '/images/users/user.png';
+        newData.imagen = req.file? '/images/users/' + req.file.filename : '/images/users/user.png';
 
         db.Usuario.update({
 
@@ -370,7 +370,7 @@ const userController = {
                 imagen : usuario.imagen
            }
 
-           let imagenUsuario = usuario.imagen
+          /*  let imagenUsuario = usuario.imagen */
 
             return res.status(200).json({
 

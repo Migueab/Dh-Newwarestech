@@ -1,4 +1,4 @@
-const { log } = require('console');
+const { log, count } = require('console');
 const { name } = require('ejs');
 const express = require('express');
 const path = require('path');
@@ -97,7 +97,7 @@ const productController = {
                 return res.render('productDetail', {
                     product: producto
                 });
-            }).catch(function(e){
+            }).catch(function (e) {
 
                 return console.log(e)
             })
@@ -121,7 +121,7 @@ const productController = {
         /* let imagenDelProducto = '/images/'+req.file.filename
 
         req.file? imagenDelProducto : ""; */
-        
+
         const validations = expressValidator.validationResult(req);
 
         if (validations.errors.length > 0) {
@@ -134,65 +134,65 @@ const productController = {
 
         }
 
-        if(validations.errors.length <= 0){
+        if (validations.errors.length <= 0) {
 
             db.Producto.create({
-    
+
                 ...newProduct,
 
-                imagen: req.file.filename
-    
-            });
-        }else{
+                imagen: "/images/" + req.file.filename
 
-            return res.render("createProduct" ,{
+            });
+        } else {
+
+            return res.render("createProduct", {
 
                 errors: validations.errors,
                 values: req.body
             })
         }
-        
+
 
         if (newProduct.product_type === "phones") {
- 
+
             return res.redirect('/products/productsPhones')
 
-        }else if(newProduct.product_type === "printer"){
+        } else if (newProduct.product_type === "printer") {
 
             return res.redirect('/products/productsPrinters')
-        
-        }else if(newProduct.product_type === "printer"){
+
+        } else if (newProduct.product_type === "printer") {
 
             return res.redirect('/products/productsInformatica')
 
-        }else if(newProduct.product_type === "accesories"){
+        } else if (newProduct.product_type === "accesories") {
 
             return res.redirect('/products/productsAccesorios');
-        }else{
+        } else {
 
             return res.redirect("/")
         }
 
 
-       /*  res.redirect('/') */
+        /*  res.redirect('/') */
 
-/* 
-        let newproductid = db.Producto.findAll({
-            limit:1,
-            where:id,
-            order:[['createdAt','DESC']]
-        })
-            .then(function (producto) { 
-
-                return producto
-
-            }).catch(function(e){
-                return console.log(e)
-            })
-
-            console.log(newproductid)
-
-        return res.redirect('/products/'+newproductid+'/productDetail'); */
+        /* 
+                let newproductid = db.Producto.findAll({
+                    limit:1,
+                    where:id,
+                    order:[['createdAt','DESC']]
+                })
+                    .then(function (producto) { 
+        
+                        return producto
+        
+                    }).catch(function(e){
+                        return console.log(e)
+                    })
+        
+                    console.log(newproductid)
+        
+                return res.redirect('/products/'+newproductid+'/productDetail'); */
 
         /* switch (newProduct.product_type) {
  
@@ -237,60 +237,56 @@ const productController = {
 
         const id = Number(req.params.id);
 
-        const validations = expressValidator.validationResult(req);
-
         db.Producto.findOne({
 
-            where:{
-                id:id
+            where: {
+                id: id
             }
 
-        }).then(function(producto){
-    
+        }).then(function (producto) {
+
+            const validations = expressValidator.validationResult(req);
+
             if (validations.errors.length > 0) {
-    
+
                 return res.render('updateProduct', {
-    
+
                     errors: validations.errors,
                     values: req.body,
                     products: producto
                 });
             }
 
-        }).catch(function(e){
+        }).catch(function (e) {
 
             return console.log(e)
         })
 
-        if(validations.errors.length <= 0){
+        let imagenProducto = req.file ? "/images/" + req.file.filename : ""
 
-            db.Producto.update({
-    
-                product_type:req.body.product_type,
-                nombre:req.body.nombre,
-                precio:req.body.precio,
-                stock:req.body.stock,
-                descripcion:req.body.descripcion,
+        db.Producto.update({
 
-                imagen: req.file.filename
-    
-            }, {
-                where: {
-                    id: id
-                }
-            });
-            
-        }
+            product_type: req.body.product_type,
+            nombre: req.body.nombre,
+            precio: req.body.precio,
+            stock: req.body.stock,
+            descripcion: req.body.descripcion,
+
+            imagen: imagenProducto
+
+        }, {
+            where: {
+                id: id
+            }
+        });
 
 
-        return res.redirect('/products/'+id+'/productDetail');
+        return res.redirect('/products/' + id + '/productDetail');
     },
 
     deleteProduct: (req, res) => {
 
         const id = Number(req.params.id);
-
-        /* let products = productModel.deleteByid(id) */
 
         db.Producto.destroy({
 
@@ -304,6 +300,97 @@ const productController = {
         // Deberia ser un resredirect prductList
     },
 
+    getCart: (req, res) => {
+
+        if (req.session.userLogged) {
+
+            let emailSession = req.session.userLogged
+
+            db.Usuario.findOne({
+
+                where: {
+                    email: emailSession.email
+                }
+            })
+            
+            .then(function (usuario) {
+
+                    return db.Carrito.findAll({
+                        where: {
+                            id: usuario.id
+                        }
+                    })
+                    
+                    .then(function (carrito) {
+
+                        return db.Producto.findAll({
+                            where: {
+                                id: 1
+                            }
+                        })
+                        .then(function (productos) {
+
+                            return res.render("productcart", {
+                                cartProducts: [productos]
+                            })
+                        })
+                    })
+                })
+
+        }
+
+        /* 
+        .then(function(productos){
+
+            return res.render("productcart", {
+                    cartProducts: productos
+                })
+        }).catch(function(e){
+
+            return console.log(e)
+        }) */
+
+
+
+        /*
+if (req.session.userAdminLogged === true) {
+
+    let emailSession = req.session.userAdminLogged
+
+    db.Usuario.findOne({
+
+        where: {
+            email: emailSession.email
+        }
+
+    }).then(function (usuario) {
+
+        let carritoEncontrado = db.Carrito.findAll({
+            where: {
+                usuarios_id: usuario.id
+            }
+        })
+    }).then(function (carrito) {
+
+            db.Producto.findAll({
+
+                where: {
+                    id: carrito.productos_id
+                }
+            })
+        }).then(function (productos) {
+
+                return res.render("productcart", {
+                    cartAdminProducts: productos,
+                })
+           
+
+    }).catch(function (e){
+        
+        return console.log(e)
+    }) */
+
+    },
     getaddToCart: (req, res) => {
 
         const id = Number(req.params.id);
@@ -314,18 +401,17 @@ const productController = {
 
         db.Carrito.findOne({
 
-            where:{
-                usuarios_id : 1
+            where: {
+                usuarios_id: 1
             }
 
-        }).then(function(carrito){
+        }).then(function (carrito) {
 
             return carrito
         })
 
         db.Producto.findByPk(id)
             .then(function (producto) {
-
 
                 return producto
             })
@@ -381,46 +467,131 @@ const productController = {
 
     },
 
-    getCart: (req, res) => {
-        
-        let emailSession 
 
-        // Hay que establecer la condicion de la session por uno u otro tipo de usuarios
+    getApiProducts: (req, res) => {
 
-        db.Usuario.findOne({
+        db.Producto.findAll()
 
-            where:{
-                email: emailSession
-            }
+            .then(productos => {
 
-        }).then(function(usuario){
+                /* usuarios.map(elemento=> elemento.dataValues.detail = detailUser ); */
 
-            let carritoEncontrado = db.Carrito.findAll({
-                where: {
-                    usuarios_id: usuario.id
-                }
-            })
-                return carritoEncontrado
+                /* usuarios.forEach(elemento=>elemento.dataValues.detail += elemento.dataValues.id); */
 
-        })
-        .then(function (carrito) {
-    
-                const cartProduct = carrito;
-                const cartAdminProducts = carrito;
-    
-                return res.render('productcart', {
-    
-                    cartProducts: cartProduct,
-                    cartAdminProducts : cartAdminProducts
+                let countByCategory
+
+                let software = 0
+                let printer = 0
+                let phones = 0
+                let accesories = 0
+
+                productos.filter((elemento) => {
+
+                    if (elemento.dataValues.product_type === "software") {
+
+                        software++
+
+                        return software
+                    }
+                    if (elemento.dataValues.product_type === "printer") {
+
+                        printer++
+
+                        return printer
+                    }
+                    if (elemento.dataValues.product_type === "accesories") {
+
+                        accesories++
+
+                        return accesories
+                    }
+                    if (elemento.dataValues.product_type === "phones") {
+
+                        phones++
+
+                        return phones
+                    }
+
+                    /* printer : elemento.dataValues.nombre ==="printer",
+                    phones : elemento.dataValues.apellido === "phones",
+                    accesories : elemento.dataValues.email=== "accesories", */
+
                 });
 
-            }).catch(function(e){
-    
-                return console.log(e)
-            });
-        
+                countByCategory = {
+
+                    software: software,
+                    printer: printer,
+                    phones: phones,
+                    accesories: accesories
+                }
+
+                let detailUser = "http://localhost:3005/products/api/products/"
+
+                const detail = "detail"
+
+                productos.map(elemento => elemento.dataValues.detail = detailUser);
+
+                productos.forEach(elemento => elemento.dataValues.detail += elemento.dataValues.id);
+
+
+
+                productos.filter((elemento) => {
+
+                    elemento.dataValues = {
+
+                        id: elemento.dataValues.id,
+                        nombre: elemento.dataValues.nombre,
+                        descripcion: elemento.dataValues.descripcion,
+
+                        detail: elemento.dataValues.detail
+                    }
+
+                });
+
+                console.log(productos)
+
+                return res.status(200).json({
+
+                    count: productos.length,
+                    countByCategory: countByCategory,
+                    data: productos,
+                    url: "http://localhost:3005/products/api/products/",
+
+                    status: 200
+                })
+            })
+    },
+
+    getApiProductDetail: (req, res) => {
+
+        db.Producto.findByPk(req.params.id)
+            .then(producto => {
+
+                let productoDB = {
+
+                    id: producto.id,
+                    nombre: producto.nombre,
+                    descripcion: producto.descripcion,
+                    imagen: producto.imagen
+                }
+
+                /*  let imagenUsuario = usuario.imagen */
+
+                return res.status(200).json({
+
+                    data: productoDB,
+                    status: 200
+
+
+                })
+            })
+
+
+
 
     }
+
 }
 
 module.exports = productController;
