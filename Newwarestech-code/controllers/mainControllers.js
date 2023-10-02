@@ -247,9 +247,23 @@ const controllers = {
             db.Usuario.create({
                 ...newUser
             })
+
+        .then( function(usuario){
+
+            let nuevoCarrito= db.Carrito.create({
+    
+            usuarios_id : usuario.id
+        }) 
+
+            return nuevoCarrito
+
+        }).catch(function(e){
+                return console.log(e)
+            })
+
+
         }
-
-
+        
         /* 
                 if (newUser) {
         

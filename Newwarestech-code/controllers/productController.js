@@ -6,6 +6,7 @@ const path = require('path');
 const expressValidator = require('express-validator');
 
 const db = require("../database/models");
+const Carrito = require('../database/models/Carrito');
 
 const productController = {
 
@@ -264,6 +265,8 @@ const productController = {
 
         let imagenProducto = req.file ? "/images/" + req.file.filename : ""
 
+        console.log(req.body)
+
         db.Producto.update({
 
             product_type: req.body.product_type,
@@ -336,7 +339,6 @@ const productController = {
                         })
                     })
                 })
-
         }
 
         /* 
@@ -350,71 +352,139 @@ const productController = {
             return console.log(e)
         }) */
 
+        if (req.session.userAdminLogged) {
 
+            let emailSession = req.session.userAdminLogged
 
-        /*
-if (req.session.userAdminLogged === true) {
+            db.Usuario.findOne({
+        
+                where: {
+                    email: emailSession.email
+                }
+        
+            })
+            .then(function (usuario) {
 
-    let emailSession = req.session.userAdminLogged
+                return db.Carrito.findAll({
+                    where: {
+                        usuarios_id: usuario.id
+                    }
+                })
+            })
+            .then(function (carrito) {
 
-    db.Usuario.findOne({
+                let productosEnCarrito = []
 
-        where: {
-            email: emailSession.email
-        }
+                productosEnCarrito.push(carrito)
 
-    }).then(function (usuario) {
+            return res.render("productcart", {
 
-        let carritoEncontrado = db.Carrito.findAll({
-            where: {
-                usuarios_id: usuario.id
-            }
-        })
-    }).then(function (carrito) {
-
-            db.Producto.findAll({
+                cartAdminProducts: productosEnCarrito,
+            })
+            
+            /* db.Producto.findAll({
 
                 where: {
-                    id: carrito.productos_id
+                    id: 1
                 }
-            })
-        }).then(function (productos) {
+            }) */
+        })
+        /* .then(function (productos) {
+
+            let productosEncontrados =[]
+
+            productController.push(productos)
 
                 return res.render("productcart", {
-                    cartAdminProducts: productos,
+                    cartAdminProducts: [],
                 })
-           
-
-    }).catch(function (e){
+                
+        }) */.catch(function (e){
         
         return console.log(e)
-    }) */
+    })
+    }
 
     },
     getaddToCart: (req, res) => {
 
         const id = Number(req.params.id);
 
-        console.log(req.params.id)
+        let productoEncontrado
+        
+        const userClientDataSession = req.session.userLogged;
+        const userAdminDataSession = req.session.userAdminLogged;
 
-        const userDataSession = req.session.userLogged;
+        if( req.session.userLogged){
 
-        db.Carrito.findOne({
+           let usuarioEncontrado =  db.Usuario.findOne({
+                where:{
+                    email: userClientDataSession.email
+                }
+            }).then(function(usuario){
 
-            where: {
-                usuarios_id: 1
-            }
-
-        }).then(function (carrito) {
-
-            return carrito
-        })
-
-        db.Producto.findByPk(id)
-            .then(function (producto) {
-
-                return producto
+                return usuario
             })
+
+            db.Carrito.findOne({
+    
+                where: {
+                    usuarios_id: usuarioEncontrado.id
+                }
+    
+            }).then(function (carrito) {
+                
+                db.Carrito.update({
+
+                    productos_id : id
+                   
+                },{
+                    where:{
+                        id : carrito.id
+                    }
+                })
+
+                return carrito
+            })
+    
+        }
+
+        if( req.session.userAdminLogged){
+
+           db.Producto.findAll({
+            where:{
+                id:id
+            }
+           }).then(function(productos){
+
+            productoEncontrado = productos
+
+            return productoEncontrado
+            
+           }).catch(function(e){
+
+            console.log(e)
+           })
+
+           db.Usuario.findOne({
+                where:{
+                    email: userAdminDataSession.email
+                }
+            }).then(function(usuario){
+
+                return db.Carrito.update({
+
+                    productos_id : productoEncontrado
+                   
+                },{
+                    where:{
+                        
+                        id : usuario.id
+                    } 
+                })
+            })
+    
+        }
 
 
         return res.redirect('/products/productCart');
@@ -429,7 +499,6 @@ if (req.session.userAdminLogged === true) {
         /*  const cartProducts =  cartProductModel.removeFromCart(id , userDataSession); */
 
         db.Cartproduct.update({
-
 
 
         }, {

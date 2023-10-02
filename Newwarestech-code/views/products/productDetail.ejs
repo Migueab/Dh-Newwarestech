@@ -39,7 +39,7 @@
 
             <% if (locals.adminIsLogged) { %>
               <div>
-                <a href="/<%= product.id %>/addToAdminCart"><input type="button" value="Agregar al carrito"></a> 
+                <a href="/products/<%= product.id %>/addToCart"><input type="button" value="Agregar al carrito"></a> 
               </div>
               <div>
                <form action="/products/<%= product.id %>/delete?method=delete" method="get">

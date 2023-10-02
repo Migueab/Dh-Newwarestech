@@ -14,10 +14,13 @@ module.exports= function(sequelize,dataTypes){
         // Tipo de usuario: cliente o administrador
         // Array de ID de productos seleccionados. figuraran en el Cartporduct
         productos_id:{
-            type:dataTypes.INTEGER
+            type:dataTypes.INTEGER,
+            unique:true
         },
         usuarios_id:{
-            type:dataTypes.INTEGER
+            type:dataTypes.INTEGER,
+            allowNull:false,
+            unique:true
         },
         cantidad:{
             type:dataTypes.INTEGER
@@ -51,15 +54,15 @@ module.exports= function(sequelize,dataTypes){
             timestamps:true
         });
 
-        /* 
-        Cartproduct.belongsToMany(models.Producto,{
+        Carrito.belongsToMany(models.Producto,{
             as: "productos",
             through:"cartproduct_producto",
             foreignKey : "cartproduct_id",
             otherKey : "producto_id",
             timestamps:false
         });
-
+        
+        /* 
         Cartproduct.belongsToMany(models.Banco,{
             as: "bancos",
             through:"banco_producto",

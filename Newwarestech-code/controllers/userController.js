@@ -6,6 +6,7 @@ const bcryptjs = require('bcryptjs');
 const session = require('express-session');
 
 const db = require("../database/models");
+const Carrito = require('../database/models/Carrito');
 const Op = db.Sequelize.Op;
 
 const userController = {
@@ -84,25 +85,19 @@ const userController = {
             ...newUser
         })
 
+        .then( function(usuario){
 
-        if(newUser){
+            let nuevoCarrito= db.Carrito.create({
+    
+            usuarios_id : usuario.id
+        }) 
 
-            db.Usuario.findOne({
-                where:{
-                    email:newUser.email
-                }
-            }).then(function(nuevousuario){
+            return nuevoCarrito
 
-                
-                return db.Carrito.create(
-
-                    usuarios_id = nuevousuario.id
-                );
-
-            }).catch(function(e){
+        }).catch(function(e){
                 return console.log(e)
             })
-        }
+    
 
         return res.redirect('/users/login');
 
@@ -192,6 +187,7 @@ const userController = {
                 }
             }
         });
+
 
     },
 
